@@ -1,0 +1,5 @@
+header {
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center; /* optional: align items to center horizontally */
+}
