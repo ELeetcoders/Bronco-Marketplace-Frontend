@@ -1,4 +1,13 @@
 <header>
     <h1>{{ title }}</h1>
+    <div class="input-group">
+        <mdb-form-control>
+          <input mdbInput type="search" id="form1" class="form-control" />
+          <label mdbLabel class="form-label" for="form1">Search</label>
+        </mdb-form-control>
+        <button type="button" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
     <app-inventory></app-inventory>
 </header>

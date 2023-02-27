@@ -57,9 +57,15 @@
   flex-direction: column;
   color: white;
 }
-.card-stats .border {
+.card-stats .stat-border {
   border-left: 1px solid rgb(172, 26, 87);
   border-right: 1px solid rgb(172, 26, 87);
+  padding:10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
 }
 .card-stats .value{
   font-size:22px;

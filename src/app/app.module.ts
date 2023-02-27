@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -14,7 +15,8 @@ import { ProductComponent } from './components/product/product.component';
     ProductComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MdbFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
