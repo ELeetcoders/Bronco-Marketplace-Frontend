@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalComponent } from '../modal/modal.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+
 
 @Component({
   selector: 'app-header',
@@ -8,10 +11,15 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   title: string = 'Bronco Marketplace';
 
-  constructor() {} //runs when component intialized
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) {} //runs when component intialized
 
   ngOnInit(): void { //run whens component loads
-
+  }
+  
+  openModal() {
+    this.modalRef = this.modalService.open(ModalComponent)
   }
 
 }

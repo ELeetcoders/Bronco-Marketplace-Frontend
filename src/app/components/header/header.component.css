@@ -3,3 +3,11 @@ header {
     flex-wrap: wrap;
     justify-content: center; /* optional: align items to center horizontally */
 }
+
+.input-group {
+    justify-content: right;
+}
+
+.buttons {
+    display: flex;
+}
