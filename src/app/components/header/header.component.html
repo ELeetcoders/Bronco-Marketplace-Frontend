@@ -4,13 +4,14 @@
         <button class="btn btn-primary" style="width: 200px" (click)="openModal()">Create Post</button>
         <div class="input-group">
             <mdb-form-control>
-            <input mdbInput type="search" id="form1" class="form-control" />
+            <input mdbInput type="search" id="form1" class="form-control"  [(ngModel)]="searchTerm"/>
             <label mdbLabel class="form-label" for="form1">Search</label>
             </mdb-form-control>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" (click)="handleSearch(searchTerm)">
             <i class="fas fa-search"></i>
             </button>
         </div>
       </div>
-    <app-inventory></app-inventory>
+      <p>{{ products }}</p>
+    <!-- <app-inventory></app-inventory> -->
 </header>
