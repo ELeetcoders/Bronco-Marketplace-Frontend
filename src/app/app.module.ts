@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ProductComponent } from './components/product/product.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { ModalComponent } from './components/modal/modal.component';
     HeaderComponent,
     InventoryComponent,
     ProductComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     MdbFormsModule,
-    MdbModalModule
+    MdbModalModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
