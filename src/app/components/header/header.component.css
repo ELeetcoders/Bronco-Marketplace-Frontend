@@ -2,6 +2,7 @@ header {
     text-align: center;
     flex-wrap: wrap;
     justify-content: center; /* optional: align items to center horizontally */
+    padding-bottom: 2rem;
 }
 
 .input-group {
@@ -10,4 +11,8 @@ header {
 
 .buttons {
     display: flex;
+}
+
+h1 {
+    padding-top: 2rem;
 }

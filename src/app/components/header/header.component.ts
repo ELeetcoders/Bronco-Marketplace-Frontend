@@ -30,7 +30,15 @@ export class HeaderComponent {
   }
 
   openModal() {
-    this.modalRef = this.modalService.open(ModalComponent);
+    this.modalRef = this.modalService.open(ModalComponent, {
+      modalClass: 'modal-dialog-centered'  //add this to make it centered
+    })
+  }
+
+  onSearchKeyUp(event: any) {
+    if (event.keyCode === 13) {
+      this.handleSearch(this.searchTerm);
+    }
   }
 
   handleSearch(searchTerm: string) {
@@ -44,10 +52,16 @@ export class HeaderComponent {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })
+      }),
+      params: {
+        "request": searchTerm
+      }
     };
     
-    let result = this.http.post(searchEndpoint, request, httpOptions);
+    //post -> 3 params(endpoint, body, options)
+    //get -> 2 params(endpoint, options)
+
+    let result = this.http.get(searchEndpoint, httpOptions);
     console.log(result)
     result.subscribe((value) => {
       console.log(value)
@@ -61,11 +75,14 @@ export class HeaderComponent {
 
     const getAllProductsEndpoint = "http://localhost:8080/product/get-all";
     let result = this.http.get(getAllProductsEndpoint, {});
+    // result automatically parsed
 
-    result.subscribe((value) => {
-      console.log(value)
+    result.subscribe((value: any) => {   //need to make value type any
+      console.log(value);
+      // for (let i = 0; i < value.length; i++) {
+      //   console.log(value[i].name);
+      // }
       this.products = JSON.stringify(value)
-      console.log(value)
     })
   }
 }

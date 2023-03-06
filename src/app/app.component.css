@@ -1,0 +1,159 @@
+@media (min-width: 400px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .5em;
+      width: 12em;
+    }
+    .card {
+        background-color: red;
+    }
+}
+
+@media (min-width: 500px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .5em;
+      width: 15em;
+    }
+}
+
+@media (min-width: 510px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .5em;
+      width: 15.5em;
+    }
+    /* /* .card {
+        height: 28vh;
+    } */
+} 
+
+@media (min-width: 530px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .5em;
+      width: 16em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 530px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .7em;
+      width: 17em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 580px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .4em;
+      width: 16.5em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 600px) {
+    .col-sm-2 { /* increase right margin to hide partial card */
+      margin-left: .8em;
+      width: 16em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .col-sm-2 {
+      margin-left: 0; /* increase right margin to hide partial card */
+      width: 15em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1100px) {
+    .col-sm-2 {
+      margin-left: 0; /* increase right margin to hide partial card */
+      width: 15em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1152px) {
+    .col-sm-2 {
+      margin-left: 0; /* increase right margin to hide partial card */
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1153px) {
+    .col-sm-2 {
+      margin-left: 1em; /* increase right margin to hide partial card */
+      width: 18.5em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-sm-2 {
+      margin-left: .8em; /* increase right margin to hide partial card */
+      width: 17em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1299px) {
+    .col-sm-2 {
+      margin-left: .7em; /* increase right margin to hide partial card */
+      width: 17em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .col-sm-2 {
+      margin-left: .1em; /* increase right margin to hide partial card */
+      width: 16.5em;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (min-width: 1536px) {
+    .col-sm-2 {
+      margin-right: 0.45rem; /* increase right margin to hide partial card */
+      width: 16rem;
+    }
+    .card {
+        height: 28vh;
+    }
+}
+
+@media (max-width: 1920px) {
+    .col-sm-2 {
+      width: 16rem;
+      padding-top: 2em
+    }
+}
+
+.card {
+    background-color: burlywood;
+}
+
