@@ -34,8 +34,8 @@ export class InventoryComponent {
       dynamicBullets: true,
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: ".fa-chevron-right",
+      prevEl: ".fa-chevron-left",
     },
     breakpoints:{
         0: {
@@ -57,5 +57,34 @@ export class InventoryComponent {
     Object.assign(this.swiperEl, swiperParams);
 
     this.swiperEl.initialize();
+
+  const nextButton: any = document.querySelector('.next-slide-button');
+  const prevButton: any = document.querySelector('.prev-slide-button');
+
+  console.log(nextButton)
+  console.log(prevButton)
+
+  this.swiperEl.on('slideChange', () => {
+
+    if (this.swiperEl.isBeginning) {
+      prevButton.classList.add('swiper-button-disabled');
+    } else {
+      prevButton.classList.remove('swiper-button-disabled');
+    }
+
+    if (this.swiperEl.isEnd) {
+      nextButton.classList.add('swiper-button-disabled');
+    } else {
+      nextButton.classList.remove('swiper-button-disabled');
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    // this.swiperEl.slideNext();
+    console.log('ee')
+  });
+  prevButton.addEventListener('click', () => {
+    // this.swiperEl.slidePrev();
+  });
   }
 }

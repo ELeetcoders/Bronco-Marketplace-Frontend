@@ -3,22 +3,35 @@
 @import "~swiper/css/navigation";
 @import "~swiper/css/pagination";
 
-.swiper-container-wrapper {
+/* .swiper-container-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
+} */
+
+
+.swiper-button-disabled {
+  display: none;
 }
 
-.swiper-buttons {
+.swiper-button-color {
+  color: rgb(59,113,202);
+}
+
+
+
+/* .swiper-buttons {
   display: flex;
   justify-content: space-between;
   margin: 0 10px;
-}
+} */
 
-.slide-container{
+swiper-container{
   /* max-width: 1120px; */
-  width: 100%;
-  padding: 40px 0;
+  width: 95%;
+  /* margin: 0; */
+  padding: 0;
+  /* padding: 40px 0; */
 }
 .slide-content{
   margin: 0 40px;
