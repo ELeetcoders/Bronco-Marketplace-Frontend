@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { register } from 'swiper/element';
 import Swiper, { Navigation, Pagination } from 'swiper';
 
@@ -12,13 +12,14 @@ Swiper.use([Navigation, Pagination]);
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent {
+  @Input() category: string;
   swiperEl: any;
 
   constructor() {}
 
   ngAfterViewInit() {
     console.log(this.swiperEl)
-    this.swiperEl = document.querySelector('#textbooks'); //swiper-container
+    this.swiperEl = document.querySelector('#'+this.category); //swiper-container
     console.log(this.swiperEl)
     const swiperParams = {
       // slidesPerView: 1,
@@ -34,8 +35,8 @@ export class InventoryComponent {
       dynamicBullets: true,
     },
     navigation: {
-      nextEl: ".fa-chevron-right",
-      prevEl: ".fa-chevron-left",
+      nextEl: ".fa-chevron-right." + this.category,
+      prevEl: ".fa-chevron-left." + this.category,
     },
     breakpoints:{
         0: {
@@ -58,8 +59,8 @@ export class InventoryComponent {
 
     this.swiperEl.initialize();
 
-  const nextButton: any = document.querySelector('.next-slide-button');
-  const prevButton: any = document.querySelector('.prev-slide-button');
+  const nextButton: any = document.querySelector('.next-slide-button.' + this.category);
+  const prevButton: any = document.querySelector('.prev-slide-button.' + this.category);
 
   console.log(nextButton)
   console.log(prevButton)

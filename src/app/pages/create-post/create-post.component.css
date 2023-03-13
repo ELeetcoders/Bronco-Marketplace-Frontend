@@ -1,0 +1,27 @@
+h1 {
+    padding-top: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+h2 {
+    padding-bottom: 2rem;
+}
+
+mdb-form-control {
+    margin-bottom: 2rem;
+}
+
+mat-form-field {
+    margin-bottom: 2rem;
+}
+
+.submit {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+.btn-lg {
+    font-size: 1rem;
+}

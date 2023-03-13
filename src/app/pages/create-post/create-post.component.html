@@ -1,0 +1,32 @@
+<h1>Bronco Marketplace</h1>
+<h2>Create Post</h2>
+
+<mdb-form-control style="width: 40vw;">
+    <!-- <input type="text" id="form12" class="form-control" />
+    <label class="form-label" for="form12">Example label</label> -->
+    <input mdbInput type="text" id="form12" class="form-control"/>
+    <label mdbLabel class="form-label" for="form1">Title</label>
+</mdb-form-control>
+
+<mdb-form-control style="width: 40vw;">
+    <textarea mdbInput class="form-control" id="textAreaExample" rows="4"></textarea>
+    <label mdbLabel class="form-label" for="textAreaExample">Description</label>
+</mdb-form-control>
+
+<mat-form-field appearance="fill">
+  <mat-label>Category</mat-label>
+  <mat-select [(value)]="selectedCategory">
+    <mat-option *ngFor="let food of categories" [value]="food">
+      {{food}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+<label class="form-label" for="customFile">Input image</label>
+<input type="file" class="form-control" id="customFile" style="width: 40vw;"/>
+</div>
+
+<div class="submit">
+<button type="button" class="btn btn-primary btn-lg">Publish</button>
+</div>

@@ -31,6 +31,7 @@ swiper-container{
   width: 95%;
   /* margin: 0; */
   padding: 0;
+  padding-bottom: 2em;
   /* padding: 40px 0; */
 }
 .slide-content{
