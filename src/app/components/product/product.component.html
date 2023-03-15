@@ -1,7 +1,7 @@
-<div class="card">
+<!-- <div class="card">
   <div class="image-content">
       <div class="card-image">
-          <img src="images/profile1.jpg" alt="" class="card-img">
+          <img [src]="getImageUrl()" alt="" class="card-img" *ngIf="productImage">
       </div>
   </div>
 
@@ -10,10 +10,12 @@
       <p class="description">{{description}}</p>
 
   </div>
-</div>
-<!-- <div class="card" >
-  <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp" class="card-img-top" alt="Sunset Over the Sea"/>
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
 </div> -->
+<div class="card">
+  <img [src]="getImageUrl()" class="card-img-top" />
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{description}}</p>
+    <!-- <a href="#!" class="btn btn-primary">Button</a> -->
+  </div>
+</div>

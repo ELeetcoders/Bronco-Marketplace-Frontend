@@ -38,15 +38,17 @@
     
     <div>
     <label class="form-label" for="customFile">Input image</label>
-    <input type="file" class="form-control" id="customFile" style="width: 40vw;"/>
+    <input type="file" class="form-control" id="customFile" style="width: 40vw;" (change)="onFileSelected($event)"/>
     </div>
   </div>
 
 
 <div style="float: right;" class="creating-card">
-  <app-product title={{title}} description={{description}}></app-product>
+  <app-product title={{title}} description={{description}} [productImage]="productImage"></app-product>
 </div>
 </div>
 <div class="submit">
   <button type="button" class="btn btn-primary btn-lg">Publish</button>
   </div>
+
+  <!-- <img [src]="getImageUrl()" alt="" class="card-img" *ngIf="productImage"> -->

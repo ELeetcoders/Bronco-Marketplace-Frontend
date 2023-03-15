@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-post',
@@ -8,8 +9,10 @@ import { FormControl } from '@angular/forms';
 })
 export class CreatePostComponent {
   title: string = 'Test';
-  description: string = '';
+  description: string = "Some quick example text to build on the card title and make up the bulk of the card's content.";
   selectedCategory: string = '';
+  productImage: File;
+  imageUrl: SafeUrl;
   categories: any[] = [
     'Textbooks',
     'Electronics',
@@ -20,7 +23,7 @@ export class CreatePostComponent {
   characterCount = 0;
   maxLength = 100;
 
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.descriptionFormControl.valueChanges.subscribe((value) => {
@@ -37,4 +40,24 @@ export class CreatePostComponent {
       event.preventDefault();
     }
   }
+
+  onFileSelected(event: any) {
+    this.productImage = event.target.files[0];
+    console.log(this.productImage)
+  }
+
+  getImageUrl() {
+    if (!this.productImage) {
+      return '';
+    }
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    };
+    reader.readAsDataURL(this.productImage);
+  
+    return this.imageUrl;
+  }
+  
 }

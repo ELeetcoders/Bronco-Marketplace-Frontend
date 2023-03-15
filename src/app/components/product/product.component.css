@@ -1,12 +1,11 @@
-
+/* 
 .card{
   border-radius: 25px;
   background-color: #FFF;
 }
 .image-content,
 .card-content{
-  /* display: flex;
-  flex-direction: column; */
+
   align-items: center;
   padding: 10px 14px;
   height: 10rem;
@@ -39,12 +38,13 @@
 }
 
 
+ */
 
-/* @media screen and (max-width: 768px) {
-  .slide-content{
-    margin: 0 10px;
-  }
-  .swiper-navBtn{
-    display: none;
-  }
-} */
+ .card-img-top {
+  height: 230px; /* Set a fixed height */
+  object-fit: cover; /* Prevent the card from shrinking */
+}
+
+.card-body {
+  min-height: 184px;
+}
