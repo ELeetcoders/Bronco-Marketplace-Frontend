@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import heic2any from 'heic2any';
 
 @Component({
   selector: 'app-create-post',
@@ -12,7 +13,7 @@ export class CreatePostComponent {
   description: string = "Some quick example text to build on the card title and make up the bulk of the card's content.";
   selectedCategory: string = '';
   productImage: File;
-  imageUrl: SafeUrl;
+  imageUrl: string = '';
   categories: any[] = [
     'Textbooks',
     'Electronics',
@@ -22,6 +23,7 @@ export class CreatePostComponent {
   descriptionFormControl = new FormControl();
   characterCount = 0;
   maxLength = 100;
+  url = ''
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -33,31 +35,69 @@ export class CreatePostComponent {
   }
 
   onKeydown(event: KeyboardEvent): void {
-    const currentLength = this.descriptionFormControl.value != null ? this.descriptionFormControl.value.length : 0;
+    const currentLength = this.descriptionFormControl.value ? this.descriptionFormControl.value.length : 0;
     const isMaxLength = currentLength >= this.maxLength;
-
-    if (isMaxLength && event.keyCode !== 8) {
+  
+    if (isMaxLength && event.key !== 'Backspace' && !(event.ctrlKey && event.key === 'a')) {
       event.preventDefault();
     }
   }
 
-  onFileSelected(event: any) {
-    this.productImage = event.target.files[0];
-    console.log(this.productImage)
+  onPaste(event: ClipboardEvent): void {
+    const clipboardData: any = event.clipboardData;
+    const pastedData = clipboardData.getData('text');
+    if (pastedData.length > this.maxLength - this.characterCount) {
+      const truncatedData = pastedData.slice(0, this.maxLength - this.characterCount);
+      const updatedValue = this.descriptionFormControl.value + truncatedData;
+      this.descriptionFormControl.setValue(updatedValue);
+      event.preventDefault();
+    } else {
+      const updatedValue = this.descriptionFormControl.value + pastedData;
+      this.descriptionFormControl.setValue(updatedValue);
+    }
   }
 
-  getImageUrl() {
-    if (!this.productImage) {
-      return '';
+  onSelectFile(event: any) {
+    // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const extension = file.name.split('.').pop();
+      const isHeic = extension.toLowerCase() === 'heic';
+      console.log(isHeic)
+  
+      if (isHeic) {
+        heic2any({
+          blob: file,
+          toType: 'image/jpeg',
+          quality: 1
+        })
+        .then((jpegBlob: any) => {
+          console.log(jpegBlob);
+          this.productImage = jpegBlob;
+        console.log(jpegBlob)
+        const reader = new FileReader();
+        reader.readAsDataURL(jpegBlob); // read file as data url
+        reader.onload = (event) => { // called once readAsDataURL is completed
+          if (event && event.target) {
+            this.url = event.target.result as string;
+            console.log(this.url);
+          }
+        }
+        })
+        
+      } else {
+        this.productImage = file;
+        console.log(file)
+        const reader = new FileReader();
+        reader.readAsDataURL(file); // read file as data url
+        reader.onload = (event) => { // called once readAsDataURL is completed
+          if (event && event.target) {
+            this.url = event.target.result as string;
+            console.log(this.url);
+          }
+        }
+      }
     }
-  
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageUrl = reader.result as string;
-    };
-    reader.readAsDataURL(this.productImage);
-  
-    return this.imageUrl;
   }
   
 }

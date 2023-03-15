@@ -10,23 +10,23 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class ProductComponent {
   @Input() title: string = 'David Dell';
   @Input() description: string = 'The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.';
-  @Input() productImage: File;
+  @Input() productImage: string;
 
-  imageUrl: SafeUrl;
+  // imageUrl: SafeUrl;
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  getImageUrl() {
-    if (!this.productImage) {
-      return '';
-    }
+  // getImageUrl() {
+  //   if (!this.productImage) {
+  //     return '';
+  //   }
   
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageUrl = reader.result as string;
-    };
-    reader.readAsDataURL(this.productImage);
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     this.imageUrl = reader.result as string;
+  //   };
+  //   reader.readAsDataURL(this.productImage);
   
-    return this.imageUrl;
-  }
+  //   return this.imageUrl;
+  // }
 }

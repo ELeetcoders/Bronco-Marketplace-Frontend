@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
+    "heic2any": "^0.0.3",
     "mdb-angular-ui-kit": "^4.0.0",
     "rxjs": "~7.8.0",
     "swiper": "^9.1.0",

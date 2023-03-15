@@ -11,7 +11,7 @@
     </mdb-form-control>
     
     <mdb-form-control style="width: 40vw;">
-        <textarea mdbInput class="form-control" id="textAreaExample" rows="4" [formControl]="descriptionFormControl" (keydown)="onKeydown($event)"></textarea>
+        <textarea mdbInput class="form-control" id="textAreaExample" rows="4" [formControl]="descriptionFormControl" (keydown)="onKeydown($event)" (paste)="onPaste($event)"></textarea>
         <label mdbLabel class="form-label" for="textAreaExample">Description</label>
         <div class="form-helper">
           <div class="form-counter">
@@ -38,13 +38,13 @@
     
     <div>
     <label class="form-label" for="customFile">Input image</label>
-    <input type="file" class="form-control" id="customFile" style="width: 40vw;" (change)="onFileSelected($event)"/>
+    <input type="file" class="form-control" id="customFile" style="width: 40vw;" (change)="onSelectFile($event)"/>
     </div>
   </div>
 
 
 <div style="float: right;" class="creating-card">
-  <app-product title={{title}} description={{description}} [productImage]="productImage"></app-product>
+  <app-product title={{title}} description={{description}} [productImage]="url"></app-product>
 </div>
 </div>
 <div class="submit">
@@ -52,3 +52,5 @@
   </div>
 
   <!-- <img [src]="getImageUrl()" alt="" class="card-img" *ngIf="productImage"> -->
+  <!-- <img [src]="url" height="200" *ngIf="url"> <br/>
+<input type='file' (change)="onSelectFile($event)"/> -->
