@@ -1,32 +1,52 @@
 <h1>Bronco Marketplace</h1>
 <h2>Create Post</h2>
 
-<mdb-form-control style="width: 40vw;">
-    <!-- <input type="text" id="form12" class="form-control" />
-    <label class="form-label" for="form12">Example label</label> -->
-    <input mdbInput type="text" id="form12" class="form-control"/>
-    <label mdbLabel class="form-label" for="form1">Title</label>
-</mdb-form-control>
+<div style="display: flex">
+  <div class="">
+      <mdb-form-control style="width: 40vw;">
+        <!-- <input type="text" id="form12" class="form-control" />
+        <label class="form-label" for="form12">Example label</label> -->
+        <input mdbInput type="text" id="form12" class="form-control" [(ngModel)]="title"/>
+        <label mdbLabel class="form-label" for="form1">Title</label>
+    </mdb-form-control>
+    
+    <mdb-form-control style="width: 40vw;">
+        <textarea mdbInput class="form-control" id="textAreaExample" rows="4" [formControl]="descriptionFormControl" (keydown)="onKeydown($event)"></textarea>
+        <label mdbLabel class="form-label" for="textAreaExample">Description</label>
+        <div class="form-helper">
+          <div class="form-counter">
+            {{ characterCount }} / {{ maxLength }}
+          </div>
+        </div>
+    </mdb-form-control>
+    
+    <div style="display: flex; height: 6rem;   align-items: center">
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select [(value)]="selectedCategory">
+        <mat-option *ngFor="let food of categories" [value]="food">
+          {{food}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<mdb-form-control style="width: 40vw;">
-    <textarea mdbInput class="form-control" id="textAreaExample" rows="4"></textarea>
-    <label mdbLabel class="form-label" for="textAreaExample">Description</label>
-</mdb-form-control>
+    <mdb-form-control style="width: 15vw; margin-left: auto;">
+      <input mdbInput type="text" id="form1" class="form-control" placeholder="$0.00"/>
+      <label mdbLabel class="form-label" for="form1">Price</label>
+    </mdb-form-control>
+    </div>  
+    
+    <div>
+    <label class="form-label" for="customFile">Input image</label>
+    <input type="file" class="form-control" id="customFile" style="width: 40vw;"/>
+    </div>
+  </div>
 
-<mat-form-field appearance="fill">
-  <mat-label>Category</mat-label>
-  <mat-select [(value)]="selectedCategory">
-    <mat-option *ngFor="let food of categories" [value]="food">
-      {{food}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
 
-<div>
-<label class="form-label" for="customFile">Input image</label>
-<input type="file" class="form-control" id="customFile" style="width: 40vw;"/>
+<div style="float: right;" class="creating-card">
+  <app-product title={{title}} description={{description}}></app-product>
 </div>
-
+</div>
 <div class="submit">
-<button type="button" class="btn btn-primary btn-lg">Publish</button>
-</div>
+  <button type="button" class="btn btn-primary btn-lg">Publish</button>
+  </div>
