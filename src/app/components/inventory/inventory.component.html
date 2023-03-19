@@ -6,42 +6,15 @@
 init="false"
 id={{category}}
 >
-<!-- <div slot="container-start">
-  
-    <div class="swiper-button-prev swiper-navBtn"></div>
-</div>
-  <div slot="container-end">
-    <div class="swiper-button-next swiper-navBtn"></div>
-  </div> -->
-  <swiper-slide>
+<swiper-slide *ngFor="let product of products">
+  <app-product [product]="product"></app-product>
+</swiper-slide>
+  <!-- <swiper-slide>
     <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
-  <swiper-slide>
-    <app-product></app-product>
-  </swiper-slide>
+  </swiper-slide> -->
+
 </swiper-container>
 <i class="fas fa-chevron-right next-slide-button swiper-button-color {{category}}" style="cursor: pointer;"></i>
-<!-- <div class="swiper-button-next swiper-navBtn"></div> -->
-<!-- <div class="swiper-button-prev swiper-navBtn"></div> -->
-<!-- <h2>es</h2> -->
 </div>
 
 

@@ -11,7 +11,7 @@
     </mdb-form-control>
     
     <mdb-form-control style="width: 40vw;">
-        <textarea mdbInput class="form-control" id="textAreaExample" rows="4" [formControl]="descriptionFormControl" (keydown)="onKeydown($event)" (paste)="onPaste($event)"></textarea>
+        <textarea mdbInput class="form-control" id="textAreaExample" rows="4" [(ngModel)]="description" [formControl]="descriptionFormControl" (keydown)="onKeydown($event)" (paste)="onPaste($event)"></textarea>
         <label mdbLabel class="form-label" for="textAreaExample">Description</label>
         <div class="form-helper">
           <div class="form-counter">
@@ -31,7 +31,7 @@
     </mat-form-field>
 
     <mdb-form-control style="width: 15vw; margin-left: auto;">
-      <input mdbInput type="text" id="form1" class="form-control" placeholder="$0.00"/>
+      <input mdbInput type="text" id="form1" class="form-control" placeholder="$0.00" [(ngModel)]="price"/>
       <label mdbLabel class="form-label" for="form1">Price</label>
     </mdb-form-control>
     </div>  
@@ -44,12 +44,17 @@
 
 
 <div style="float: right;" class="creating-card">
-  <app-product title={{title}} description={{description}} [productImage]="url"></app-product>
+  <app-product title={{title}} description={{description}} [imageUrl]="imageUrl"></app-product>
 </div>
 </div>
-<div class="submit">
-  <button type="button" class="btn btn-primary btn-lg">Publish</button>
+<div class="button-group">
+  <div>
+    <button type="button" class="btn btn-primary btn-lg" routerLink="/">Cancel</button>
   </div>
+  <div class="submit">
+    <button type="button" class="btn btn-primary btn-lg" (click)="onPublishClick()">Publish</button>
+  </div>
+</div>
 
   <!-- <img [src]="getImageUrl()" alt="" class="card-img" *ngIf="productImage"> -->
   <!-- <img [src]="url" height="200" *ngIf="url"> <br/>

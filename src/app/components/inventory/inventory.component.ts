@@ -1,6 +1,8 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { register } from 'swiper/element';
 import Swiper, { Navigation, Pagination } from 'swiper';
+import { Product } from 'src/app/models/Product';
+import { PRODUCTS } from 'src/app/mock-products';
 
 
 register();
@@ -13,6 +15,8 @@ Swiper.use([Navigation, Pagination]);
 })
 export class InventoryComponent {
   @Input() category: string;
+  @Input() products: Product[];
+
   swiperEl: any;
 
   constructor() {}

@@ -17,10 +17,10 @@ mat-form-field {
     margin-bottom: 2rem;
 }
 
-.submit {
+/* .submit {
     text-align: center;
     margin-top: 6rem;
-}
+} */
 
 .btn-lg {
     font-size: 1rem;
@@ -34,3 +34,14 @@ mat-form-field {
     width: 20vw;
     margin-left: 10vw;
 }
+
+.button-group {
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button-group > div {
+    margin: 0 10px;
+  }

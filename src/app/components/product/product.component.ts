@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Product } from 'src/app/models/Product';
 
 
 @Component({
@@ -8,13 +9,26 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input() title: string = 'David Dell';
-  @Input() description: string = 'The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.';
-  @Input() productImage: string;
+  /* Input used for home page */
+  @Input() product: Product | null = null;
+
+  @Input() imageUrl: string = '';
+
+  title: string = '';
+  description: string = '';
+  //imageUrl: string = '';
 
   // imageUrl: SafeUrl;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor() {}
+
+  ngAfterViewInit() {
+    if (this.product != null) {
+      this.title = this.product.name;
+      this.description = this.product.desc;
+      this.imageUrl = this.product.imageUrl;
+    }
+  }
 
   // getImageUrl() {
   //   if (!this.productImage) {

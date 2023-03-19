@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import heic2any from 'heic2any';
+import { HttpClient } from '@angular/common/http';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'app-create-post',
@@ -9,11 +11,12 @@ import heic2any from 'heic2any';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent {
-  title: string = 'Test';
-  description: string = "Some quick example text to build on the card title and make up the bulk of the card's content.";
+  title: string = '';
+  description: string = ''; //"Some quick example text to build on the card title and make up the bulk of the card's content.";
   selectedCategory: string = '';
   productImage: File;
   imageUrl: string = '';
+  price: string = '';
   categories: any[] = [
     'Textbooks',
     'Electronics',
@@ -23,9 +26,9 @@ export class CreatePostComponent {
   descriptionFormControl = new FormControl();
   characterCount = 0;
   maxLength = 100;
-  url = ''
+  //url = ''
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.descriptionFormControl.valueChanges.subscribe((value) => {
@@ -37,12 +40,17 @@ export class CreatePostComponent {
   onKeydown(event: KeyboardEvent): void {
     const currentLength = this.descriptionFormControl.value ? this.descriptionFormControl.value.length : 0;
     const isMaxLength = currentLength >= this.maxLength;
-  
-    if (isMaxLength && event.key !== 'Backspace' && !(event.ctrlKey && event.key === 'a')) {
+    const isControlShortcutKey = (event.ctrlKey || event.metaKey) && ["a", "c", "x", "z", "y"].includes(event.key.toLowerCase());
+    const isPrintableKey = event.key.length === 1;
+    const isAllowedSpecialChar = /[-_+|\\{}[\]()`;:',.<>?]/.test(event.key);
+    if (event.key == 'Tab') {}
+    else if (isMaxLength && !isControlShortcutKey && event.key !== "Backspace") {
+      event.preventDefault();
+    } else if (!isControlShortcutKey && (isPrintableKey || !isAllowedSpecialChar) && event.key !== "Backspace" && currentLength >= this.maxLength) {
       event.preventDefault();
     }
   }
-
+  
   onPaste(event: ClipboardEvent): void {
     const clipboardData: any = event.clipboardData;
     const pastedData = clipboardData.getData('text');
@@ -52,7 +60,10 @@ export class CreatePostComponent {
       this.descriptionFormControl.setValue(updatedValue);
       event.preventDefault();
     } else {
-      const updatedValue = this.descriptionFormControl.value + pastedData;
+      if (this.descriptionFormControl.value == null) {
+        this.descriptionFormControl.setValue("")
+      }
+      const updatedValue = this.descriptionFormControl.value;
       this.descriptionFormControl.setValue(updatedValue);
     }
   }
@@ -79,8 +90,8 @@ export class CreatePostComponent {
         reader.readAsDataURL(jpegBlob); // read file as data url
         reader.onload = (event) => { // called once readAsDataURL is completed
           if (event && event.target) {
-            this.url = event.target.result as string;
-            console.log(this.url);
+            this.imageUrl = event.target.result as string;
+            console.log(this.imageUrl);
           }
         }
         })
@@ -92,12 +103,37 @@ export class CreatePostComponent {
         reader.readAsDataURL(file); // read file as data url
         reader.onload = (event) => { // called once readAsDataURL is completed
           if (event && event.target) {
-            this.url = event.target.result as string;
-            console.log(this.url);
+            this.imageUrl = event.target.result as string;
+            console.log(this.imageUrl);
           }
         }
       }
     }
+  }
+
+  onPublishClick(): void {
+    // Define the data to be sent in the request body
+    console.log(this.title)
+    console.log(this.description)
+    console.log(this.selectedCategory)
+    console.log(parseFloat(this.price))
+    console.log(this.imageUrl)
+    const data = {
+      title: this.title,
+      description: this.description,
+      category: this.selectedCategory,
+      price: parseFloat(this.price), // You will need to update this to get the actual price value from the input field
+      image: this.productImage
+    };
+  
+    // Send the HTTP POST request to the server
+    const observer: Observer<any> = {
+      next: response => console.log(response),
+      error: error => console.error(error),
+      complete: () => console.log('complete')
+    };
+
+    this.http.post('http://localhost:8080/user/create-product', data).subscribe(observer);
   }
   
 }
