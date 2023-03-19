@@ -47,19 +47,23 @@ export class HomeComponent {
       next: response => {
         console.log(response)
         this.products = response
+        let updatedObject = {}
+        for (const key in this.products) {
+          if (key === "BOOK") {
+            this.products["Textbooks"] = this.products[key];
+            delete this.products["BOOK"]
+          }
+          else if (key === "TECH") {
+            this.products["Tech"] = this.products[key];
+            delete this.products["TECH"]
+          }
+          else if (key === "SERVICES") {
+            this.products["Services"] = this.products[key];
+            delete this.products["SERVICES"]
+          }
+        }
         this.categories = Object.keys(this.products);
-        // for (let i = 0; i < this.categories.length; i++) {
-        //   if (this.categories[i] == "BOOK") {
-        //     this.categoryTitles.push("Textbooks")
-        //   }
-        //   else if (this.categories[i] == "TECH") {
-        //     this.categoryTitles.push("Tech")
-        //   }
-        //   else if (this.categories[i] == "SERVICES") {
-        //     this.categoryTitles.push("Services")
-        //   }
-        // }
-        console.log(this.categories)
+        console.log(this.products)
         console.log(this.products['TECH'])
       },
       error: error => console.error(error),

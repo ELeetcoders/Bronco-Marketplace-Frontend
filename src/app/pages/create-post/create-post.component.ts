@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import heic2any from 'heic2any';
 import { HttpClient } from '@angular/common/http';
 import { Observer } from 'rxjs';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-create-post',
@@ -28,7 +29,7 @@ export class CreatePostComponent {
   maxLength = 100;
   //url = ''
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef ) {}
 
   ngOnInit(): void {
     this.descriptionFormControl.valueChanges.subscribe((value) => {
@@ -74,38 +75,61 @@ export class CreatePostComponent {
       const file = event.target.files[0];
       const extension = file.name.split('.').pop();
       const isHeic = extension.toLowerCase() === 'heic';
-      console.log(isHeic)
+      console.log(isHeic);
   
       if (isHeic) {
         heic2any({
           blob: file,
           toType: 'image/jpeg',
-          quality: 1
+          quality: .3
         })
-        .then((jpegBlob: any) => {
-          console.log(jpegBlob);
-          this.productImage = jpegBlob;
-        console.log(jpegBlob)
-        const reader = new FileReader();
-        reader.readAsDataURL(jpegBlob); // read file as data url
-        reader.onload = (event) => { // called once readAsDataURL is completed
-          if (event && event.target) {
-            this.imageUrl = event.target.result as string;
-            console.log(this.imageUrl);
-          }
-        }
-        })
-        
+          .then((jpegBlob: any) => {
+            console.log(jpegBlob);
+            this.productImage = jpegBlob;
+            console.log(jpegBlob);
+            const reader = new FileReader();
+            reader.readAsDataURL(jpegBlob); // read file as data url
+            reader.onload = (event) => { // called once readAsDataURL is completed
+              if (event && event.target) {
+                this.imageUrl = event.target.result as string;
+                console.log(this.imageUrl);
+              }
+            };
+          });
+  
       } else {
-        this.productImage = file;
-        console.log(file)
-        const reader = new FileReader();
-        reader.readAsDataURL(file); // read file as data url
-        reader.onload = (event) => { // called once readAsDataURL is completed
-          if (event && event.target) {
-            this.imageUrl = event.target.result as string;
-            console.log(this.imageUrl);
-          }
+        // Check if the file size exceeds 1MB
+        console.log("greater")
+          console.log(file.size)
+        if (file.size > 1000000) {
+          console.log("greater")
+          console.log(file.size)
+          new Compressor(file, {
+            quality: 0.3, // Set the compression quality to 30%
+            success: (compressedFile) => {
+              console.log(compressedFile);
+              const reader = new FileReader();
+              reader.readAsDataURL(compressedFile); // read file as data url
+              reader.onload = (event) => { // called once readAsDataURL is completed
+                if (event && event.target) {
+                  this.imageUrl = event.target.result as string;
+                  console.log(this.imageUrl);
+                  this.cd.detectChanges()
+                }
+              };
+            }
+          });
+        } else {
+          this.productImage = file;
+          console.log(file);
+          const reader = new FileReader();
+          reader.readAsDataURL(file); // read file as data url
+          reader.onload = (event) => { // called once readAsDataURL is completed
+            if (event && event.target) {
+              this.imageUrl = event.target.result as string;
+              console.log(this.imageUrl);
+            }
+          };
         }
       }
     }
