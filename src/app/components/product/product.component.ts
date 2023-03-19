@@ -14,8 +14,8 @@ export class ProductComponent {
 
   @Input() imageUrl: string = '';
 
-  title: string = '';
-  description: string = '';
+  @Input() title: string = '';
+  @Input() description: string = '';
   //imageUrl: string = '';
 
   // imageUrl: SafeUrl;

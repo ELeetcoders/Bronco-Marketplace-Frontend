@@ -3,11 +3,6 @@
 @import "~swiper/css/navigation";
 @import "~swiper/css/pagination";
 
-/* .swiper-container-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
 
 
 .swiper-button-disabled {
@@ -18,13 +13,6 @@
   color: rgb(59,113,202);
 }
 
-
-
-/* .swiper-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 10px;
-} */
 
 swiper-container{
   /* max-width: 1120px; */
@@ -119,13 +107,6 @@ swiper-container{
 .swiper-navBtn::after{
   font-size: 35px;
 }
-/* .swiper-button-next{
-  right: 0;
-}
-.swiper-button-prev{
-  left: 0;
-} */
-
 
 
 .swiper-pagination-bullet{
@@ -135,12 +116,3 @@ swiper-container{
 .swiper-pagination-bullet-active{
   background-color: #4070F4;
 }
-
-/* @media screen and (max-width: 768px) {
-  .slide-content{
-    margin: 0 10px;
-  }
-  .swiper-navBtn{
-    display: none;
-  }
-} */

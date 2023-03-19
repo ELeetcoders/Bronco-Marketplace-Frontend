@@ -120,10 +120,11 @@ export class CreatePostComponent {
     console.log(this.imageUrl)
     const data = {
       title: this.title,
+      user: "mmt@cpp.edu",
       description: this.description,
-      category: this.selectedCategory,
+      category: this.selectedCategory.toUpperCase(),
       price: parseFloat(this.price), // You will need to update this to get the actual price value from the input field
-      image: this.productImage
+      imageURL: this.imageUrl
     };
   
     // Send the HTTP POST request to the server
@@ -133,7 +134,7 @@ export class CreatePostComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.post('http://localhost:8080/user/create-product', data).subscribe(observer);
+    this.http.post('http://localhost:8080/user/create-listing', JSON.stringify(data)).subscribe(observer);
   }
   
 }
