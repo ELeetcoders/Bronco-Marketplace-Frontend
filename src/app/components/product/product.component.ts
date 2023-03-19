@@ -27,6 +27,14 @@ export class ProductComponent {
     if (this.product != null) {
       this.title = this.product.name;
       this.description = this.product.desc;
+      // if (!this.imageUrl.includes("data:image/jpeg;base64,")) {
+      //   console.log(this.imageUrl)
+      //   this.imageUrl = "data:image/jpeg;base64," + this.imageUrl
+      //   console.log(this.imageUrl)
+      // }
+      // if (this.product.imageUrl == undefined) {
+      //   this.imageUrl = this.product["imageURL"]
+      // }
       this.imageUrl = this.product.imageUrl;
     }
     //this.cd.detectChanges();

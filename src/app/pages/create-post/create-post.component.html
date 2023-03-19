@@ -24,8 +24,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Category</mat-label>
       <mat-select [(value)]="selectedCategory">
-        <mat-option *ngFor="let food of categories" [value]="food">
-          {{food}}
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -52,7 +52,7 @@
     <button type="button" class="btn btn-primary btn-lg" routerLink="/">Cancel</button>
   </div>
   <div class="submit">
-    <button type="button" class="btn btn-primary btn-lg" (click)="onPublishClick()">Publish</button>
+    <button type="button" class="btn btn-primary btn-lg" (click)="onPublishClick()" routerLink="/">Publish</button>
   </div>
 </div>
 

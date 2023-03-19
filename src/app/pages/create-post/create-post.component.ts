@@ -19,7 +19,7 @@ export class CreatePostComponent {
   price: string = '';
   categories: any[] = [
     'Textbooks',
-    'Electronics',
+    'Tech',
     'Services'
   ];
 
@@ -116,15 +116,27 @@ export class CreatePostComponent {
     console.log(this.title)
     console.log(this.description)
     console.log(this.selectedCategory)
-    console.log(parseFloat(this.price))
+    console.log(Number(this.price).toFixed(2))
     console.log(this.imageUrl)
+    if (this.selectedCategory == "Textbooks") {
+      this.selectedCategory = "BOOK"
+    }
+    else if (this.selectedCategory == "Services") {
+      this.selectedCategory = "SERVICES"
+    }
     const data = {
-      title: this.title,
-      user: "mmt@cpp.edu",
-      description: this.description,
+      name: this.title,
+      user: {
+        email: "mmt@cpp.edu",
+        username: "michael8pho",
+        password: "123",
+        firstname: "Michael",
+        lastname: "Truong"
+      },
+      desc: this.description,
       category: this.selectedCategory.toUpperCase(),
-      price: parseFloat(this.price), // You will need to update this to get the actual price value from the input field
-      imageURL: this.imageUrl
+      price: this.price, // You will need to update this to get the actual price value from the input field
+      imageURL: this.imageUrl //.replace("data:image/jpeg;base64,", "")
     };
   
     // Send the HTTP POST request to the server
@@ -134,7 +146,7 @@ export class CreatePostComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.post('http://localhost:8080/user/create-listing', JSON.stringify(data)).subscribe(observer);
+    this.http.post('http://localhost:8080/user/create-listing', data).subscribe(observer);
   }
   
 }

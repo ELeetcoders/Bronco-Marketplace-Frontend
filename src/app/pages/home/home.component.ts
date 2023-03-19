@@ -14,12 +14,15 @@ export class HomeComponent {
   categories: string[];
   fetching: boolean = false;
 
+  // categoryTitles: string[];  //temp var to rename category until changed firebase collection name
+
   constructor(
     private http: HttpClient,
     private cd: ChangeDetectorRef
     ) {
-    //this.products = PRODUCTS;
-    //this.categories = Object.keys(this.products);
+    // this.products = PRODUCTS;
+    // console.log(PRODUCTS)
+    // this.categories = Object.keys(this.products);
   }
 
   ngOnInit(): void { //run whens component loads
@@ -45,7 +48,19 @@ export class HomeComponent {
         console.log(response)
         this.products = response
         this.categories = Object.keys(this.products);
-        console.log(this.products)
+        // for (let i = 0; i < this.categories.length; i++) {
+        //   if (this.categories[i] == "BOOK") {
+        //     this.categoryTitles.push("Textbooks")
+        //   }
+        //   else if (this.categories[i] == "TECH") {
+        //     this.categoryTitles.push("Tech")
+        //   }
+        //   else if (this.categories[i] == "SERVICES") {
+        //     this.categoryTitles.push("Services")
+        //   }
+        // }
+        console.log(this.categories)
+        console.log(this.products['TECH'])
       },
       error: error => console.error(error),
       complete: () => console.log('complete')
