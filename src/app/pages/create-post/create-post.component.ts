@@ -101,7 +101,7 @@ export class CreatePostComponent {
         // Check if the file size exceeds 1MB
         console.log("greater")
           console.log(file.size)
-        if (file.size > 1000000) {
+        if (file.size > 100000) {
           console.log("greater")
           console.log(file.size)
           new Compressor(file, {
