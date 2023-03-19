@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input, ChangeDetectorRef } from '@angular/core';
 import { register } from 'swiper/element';
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { Product } from 'src/app/models/Product';
@@ -18,13 +18,22 @@ export class InventoryComponent {
   @Input() products: Product[];
 
   swiperEl: any;
+  swiperParams: any
 
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef) {}
+
+  ngOnChanges() {
+    console.log('okieeeee')
+    //this.cd.detectChanges()
+    // Object.assign(this.swiperEl, this.swiperParams);
+    // this.swiperEl.initialize()
+    //this.swiperEl.update()
+  }
 
   ngAfterViewInit() {
-    console.log(this.swiperEl)
+    //console.log(this.swiperEl)
     this.swiperEl = document.querySelector('#'+this.category); //swiper-container
-    console.log(this.swiperEl)
+    //console.log(this.swiperEl)
     const swiperParams = {
       // slidesPerView: 1,
       slidesPerGroup:3,
@@ -66,8 +75,8 @@ export class InventoryComponent {
   const nextButton: any = document.querySelector('.next-slide-button.' + this.category);
   const prevButton: any = document.querySelector('.prev-slide-button.' + this.category);
 
-  console.log(nextButton)
-  console.log(prevButton)
+  // console.log(nextButton)
+  // console.log(prevButton)
 
   this.swiperEl.on('slideChange', () => {
 
@@ -86,10 +95,11 @@ export class InventoryComponent {
 
   nextButton.addEventListener('click', () => {
     // this.swiperEl.slideNext();
-    console.log('ee')
+    //console.log('ee')
   });
   prevButton.addEventListener('click', () => {
     // this.swiperEl.slidePrev();
   });
   }
+
 }

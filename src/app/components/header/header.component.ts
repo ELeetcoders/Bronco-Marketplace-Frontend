@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
@@ -18,6 +18,7 @@ export class HeaderComponent {
   products: any = ''
   searchTerm: string = '';
   modalRef: MdbModalRef<ModalComponent> | null = null;
+  @Output() searchResults = new EventEmitter<any>();
 
   constructor(
     private modalService: MdbModalService,
@@ -26,7 +27,7 @@ export class HeaderComponent {
   ) { } //runs when component intialized
 
   ngOnInit(): void { //run whens component loads
-    this.getProducts();
+    //this.getProducts();
   }
 
   openModal() {
@@ -63,11 +64,24 @@ export class HeaderComponent {
 
     let result = this.http.get(searchEndpoint, httpOptions);
     console.log(result)
+    let slideContainers = document.querySelectorAll('swiper-slide');
+    let categoryHeaders = document.querySelectorAll('.inventory-category');
+    console.log(slideContainers)
+  for (let i = 0; i < slideContainers.length; i++) {
+    console.log('removed')
+    slideContainers[i].remove();
+  }
+  // for (let i = 0; i < categoryHeaders.length; i++) {
+  //   console.log('removed')
+  //   categoryHeaders[i].remove()
+  // }
     result.subscribe((value) => {
       console.log(value)
-      this.products = JSON.stringify(value)
+      //this.products = JSON.stringify(value)
+      this.searchResults.emit(value)
+      //this.cd.detectChanges();
     })
-    this.cd.detectChanges();
+    //this.cd.detectChanges();
     console.log(this.products + "testtt")
   }
 

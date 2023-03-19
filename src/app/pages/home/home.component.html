@@ -1,11 +1,17 @@
-<app-header></app-header>
+<app-header (searchResults)="handleSearchResults($event)"></app-header>
 <!-- <div class="col-sm-2">  
     <app-product></app-product>
 </div> -->
-<div *ngFor="let category of categories">
-  <h2>{{ category }}</h2>
+<!-- <div *ngIf="fetching">
+
+  </div> -->
+
+<!-- <div *ngIf="!fetching"> -->
+<div *ngFor="let category of categories" class="inventory-wrapper">
+  <h2 class="inventory-category">{{ category }}</h2>
   <app-inventory [category]="category" [products]="products[category]"></app-inventory>
 </div>
+<!-- </div> -->
 
 <!-- <h2>Textbooks</h2>
 <app-inventory category="textbooks"></app-inventory>

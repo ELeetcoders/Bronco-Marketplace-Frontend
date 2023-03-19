@@ -20,14 +20,16 @@ export class ProductComponent {
 
   // imageUrl: SafeUrl;
 
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
+    console.log('changes')
     if (this.product != null) {
       this.title = this.product.name;
       this.description = this.product.desc;
       this.imageUrl = this.product.imageUrl;
     }
+    //this.cd.detectChanges();
   }
 
   // getImageUrl() {
