@@ -170,7 +170,7 @@ export class CreatePostComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.post('http://localhost:8080/user/create-listing', data).subscribe(observer);
+    this.http.post('http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/user/create-listing', data).subscribe(observer);
   }
   
 }

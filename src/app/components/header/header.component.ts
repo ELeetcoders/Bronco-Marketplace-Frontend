@@ -45,7 +45,7 @@ export class HeaderComponent {
   handleSearch(searchTerm: string) {
     //let searchTerm = "example";
     console.log(searchTerm)
-    const searchEndpoint = "http://localhost:8080/product/search";
+    const searchEndpoint = "http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/search";
     const request = {
       term: searchTerm
     };
@@ -87,7 +87,7 @@ export class HeaderComponent {
 
   getProducts() {
 
-    const getAllProductsEndpoint = "http://localhost:8080/product/get-all";
+    const getAllProductsEndpoint = "http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/get-all";
     let result = this.http.get(getAllProductsEndpoint, {});
     // result automatically parsed
 

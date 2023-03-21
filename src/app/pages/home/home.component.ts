@@ -34,6 +34,20 @@ export class HomeComponent {
     //this.fetching = true;
     console.log(results)
     this.products = results
+    for (const key in this.products) {
+      if (key === "BOOK") {
+        this.products["Textbooks"] = this.products[key];
+        delete this.products["BOOK"]
+      }
+      else if (key === "TECH") {
+        this.products["Tech"] = this.products[key];
+        delete this.products["TECH"]
+      }
+      else if (key === "SERVICES") {
+        this.products["Services"] = this.products[key];
+        delete this.products["SERVICES"]
+      }
+    }
     this.categories = Object.keys(this.products);
     console.log(this.categories)
     //this.cd.detectChanges();
@@ -70,6 +84,6 @@ export class HomeComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.get('http://localhost:8080/product/get-all', {}).subscribe(observer);
+    this.http.get('http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/get-all', {}).subscribe(observer);
   }
 }
