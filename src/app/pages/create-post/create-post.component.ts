@@ -38,6 +38,31 @@ export class CreatePostComponent {
     });
   }
 
+  formatDollarValue(event: any) {
+    // Get the input field value
+    let input = event.target.value;
+  
+    // Remove all non-numeric characters except for the decimal point
+    input = input.replace(/[^0-9.]/g, '');
+  
+    // Limit to two decimal places
+    let parts = input.split('.');
+    if (parts.length > 1) {
+      parts[1] = parts[1].substr(0, 2);
+      input = parts.join('.');
+    }
+  
+    // Add a dollar sign to the beginning of the value
+    input = '$' + input;
+  
+    // Set the input field value to the formatted value
+    event.target.value = input;
+  
+    // Update the component's price variable with the formatted value
+    this.price = input;
+  }
+  
+
   onKeydown(event: KeyboardEvent): void {
     const currentLength = this.descriptionFormControl.value ? this.descriptionFormControl.value.length : 0;
     const isMaxLength = currentLength >= this.maxLength;
@@ -159,7 +184,7 @@ export class CreatePostComponent {
       },
       desc: this.description,
       category: this.selectedCategory.toUpperCase(),
-      price: this.price, // You will need to update this to get the actual price value from the input field
+      price: this.price.replace("$",""), // You will need to update this to get the actual price value from the input field
       imageURL: this.imageUrl //.replace("data:image/jpeg;base64,", "")
     };
   

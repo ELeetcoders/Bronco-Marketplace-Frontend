@@ -16,6 +16,7 @@ export class ProductComponent {
 
   @Input() title: string = '';
   @Input() description: string = '';
+  @Input() price: string = '';
   //imageUrl: string = '';
 
   // imageUrl: SafeUrl;
@@ -27,6 +28,7 @@ export class ProductComponent {
     if (this.product != null) {
       this.title = this.product.name;
       this.description = this.product.desc;
+      this.price = "$" + this.product.price.toString()
       // if (!this.imageUrl.includes("data:image/jpeg;base64,")) {
       //   console.log(this.imageUrl)
       //   this.imageUrl = "data:image/jpeg;base64," + this.imageUrl

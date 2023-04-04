@@ -20,7 +20,8 @@ import { MatSelectModule } from  '@angular/material/select'
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'create-post', component: CreatePostComponent}
+  {path: 'create-post', component: CreatePostComponent},
+  {path: 'search', component: HomeComponent}
 ]
 
 @NgModule({

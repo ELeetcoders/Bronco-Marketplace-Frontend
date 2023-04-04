@@ -48,3 +48,10 @@
 .card-body {
   min-height: 184px;
 }
+
+.card-footer {
+  position: absolute; /* Position the footer element absolutely within the card */
+  bottom: 0; /* Align the footer element to the bottom of the card */
+  right: 0; /* Align the footer element to the right of the card */
+  border: 0;
+}
