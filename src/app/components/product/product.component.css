@@ -55,3 +55,7 @@
   right: 0; /* Align the footer element to the right of the card */
   border: 0;
 }
+
+.card a {
+  color: rgb(79,79,79) !important;
+}

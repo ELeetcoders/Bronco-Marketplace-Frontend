@@ -16,12 +16,15 @@ import { ModalComponent } from './components/modal/modal.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from  '@angular/material/select'
+import { MatSelectModule } from  '@angular/material/select';
+import { ProductPageComponent } from './pages/product-page/product-page.component'
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'create-post', component: CreatePostComponent},
-  {path: 'search', component: HomeComponent}
+  {path: 'search', component: HomeComponent},
+  {path: 'product/:id', component: ProductPageComponent},
+  // { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
 @NgModule({
@@ -33,6 +36,7 @@ const appRoutes: Routes = [
     ModalComponent,
     HomeComponent,
     CreatePostComponent,
+    ProductPageComponent,
   ],
   imports: [
     BrowserModule,

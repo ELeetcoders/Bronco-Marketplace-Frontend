@@ -12,7 +12,8 @@
   </div>
 </div> -->
 <div class="card">
-  <img [src]="imageUrl" class="card-img-top" />
+  <!-- <a href="/product/{{id}}"> -->
+  <img [src]="imageUrl" class="card-img-top clickable" (click)="openModal()" />
   <div class="card-body">
     <h5 class="card-title">{{title}}</h5>
     <p class="card-text">{{description}}</p>

@@ -1,6 +1,10 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Product } from 'src/app/models/Product';
+import { ModalComponent } from '../modal/modal.component';
+import { Location } from '@angular/common';
+import { Router, UrlSegment } from '@angular/router';
 
 
 @Component({
@@ -17,11 +21,38 @@ export class ProductComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() price: string = '';
+
+  id: string = ''; 
   //imageUrl: string = '';
 
   // imageUrl: SafeUrl;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+      isOpen: boolean = false
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    private modalService: MdbModalService,
+    private location: Location,
+    private router: Router
+    ) {
+
+      this.location.subscribe((loc) => {
+        console.log(loc)
+        if (loc.url === '') {
+          this.modalRef?.close()
+          //this.location.go('/', '', this.router.parseUrl(this.router.url).queryParams);
+          //this.location.back()
+        }
+        else if (loc.url === '/product/' + this.id) {
+          this.modalRef = this.modalService.open(ModalComponent, {
+            modalClass: 'modal-fullscreen'
+          })
+          //this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
+          this.location.forward()
+        }
+      });
+    }
 
   ngAfterViewInit() {
     console.log('changes')
@@ -29,6 +60,7 @@ export class ProductComponent {
       this.title = this.product.name;
       this.description = this.product.desc;
       this.price = "$" + this.product.price.toString()
+      this.id = this.product.id;
       // if (!this.imageUrl.includes("data:image/jpeg;base64,")) {
       //   console.log(this.imageUrl)
       //   this.imageUrl = "data:image/jpeg;base64," + this.imageUrl
@@ -40,6 +72,14 @@ export class ProductComponent {
       this.imageUrl = this.product.imageUrl;
     }
     //this.cd.detectChanges();
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(ModalComponent, {
+      modalClass: 'modal-fullscreen'
+    })
+    this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
+    //this.router.navigate(['/product/' + this.id])
   }
 
   // getImageUrl() {
