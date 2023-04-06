@@ -27,9 +27,14 @@
   }
    */
 
-   .img-container img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-  }
+.img-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.modal-body {
+  padding: 0;
+}
 
