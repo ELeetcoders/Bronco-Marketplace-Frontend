@@ -1,0 +1,27 @@
+<div class="modal-header" style="height: 7vh;">
+  <!-- <h5 class="modal-title" id="exampleModalLabel">Post a product</h5> -->
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="closeModal()"
+  ></button>
+</div>
+<div class="modal-body" style="height: 93vh; margin: 0; padding: left 0;">
+  <div class="row">
+    <div class="col-md-8 img-container d-flex justify-content-center align-items-center" style="height: 85vh;">
+      <img class="img-fluid" [src]="imageUrl"/>
+    </div>
+    <div class="col-md-4 detail-container">
+      <h2>{{title}}</h2>
+      <h2>{{description}}</h2>
+      <h2>${{price}}</h2>
+    </div>
+  </div>
+</div>
+
+      <!-- <img src="https://c4.wallpaperflare.com/wallpaper/439/787/759/basketball-basketball-court-hoop-city-wallpaper-preview.jpg"/> -->
+
+    
+      
+

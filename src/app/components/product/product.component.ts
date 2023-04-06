@@ -2,9 +2,10 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { Product } from 'src/app/models/Product';
-import { ModalComponent } from '../modal/modal.component';
+import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { Location } from '@angular/common';
 import { Router, UrlSegment } from '@angular/router';
+import { ProductDetailService } from 'src/app/services/ProductDetailService';
 
 
 @Component({
@@ -27,14 +28,15 @@ export class ProductComponent {
 
   // imageUrl: SafeUrl;
 
-  modalRef: MdbModalRef<ModalComponent> | null = null;
+  modalRef: MdbModalRef<ProductModalComponent> | null = null;
       isOpen: boolean = false
 
   constructor(
     private cd: ChangeDetectorRef,
     private modalService: MdbModalService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    public ProductDetailService: ProductDetailService,
     ) {
 
       this.location.subscribe((loc) => {
@@ -45,7 +47,7 @@ export class ProductComponent {
           //this.location.back()
         }
         else if (loc.url === '/product/' + this.id) {
-          this.modalRef = this.modalService.open(ModalComponent, {
+          this.modalRef = this.modalService.open(ProductModalComponent, {
             modalClass: 'modal-fullscreen'
           })
           //this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
@@ -75,10 +77,14 @@ export class ProductComponent {
   }
 
   openModal() {
-    this.modalRef = this.modalService.open(ModalComponent, {
+    this.modalRef = this.modalService.open(ProductModalComponent, {
       modalClass: 'modal-fullscreen'
     })
     this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
+    this.ProductDetailService.imageUrl = this.imageUrl
+    this.ProductDetailService.price = this.price
+    this.ProductDetailService.description = this.description
+    this.ProductDetailService.title = this.title
     //this.router.navigate(['/product/' + this.id])
   }
 

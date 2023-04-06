@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
+import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 import { Injectable, ChangeDetectorRef } from '@angular/core';
@@ -18,7 +18,7 @@ export class HeaderComponent {
   title: string = 'Bronco Marketplace';
   products: any = ''
   searchTerm: string = '';
-  modalRef: MdbModalRef<ModalComponent> | null = null;
+  modalRef: MdbModalRef<ProductModalComponent> | null = null;
   @Output() searchResults = new EventEmitter<any>();
 
   constructor(
@@ -34,7 +34,7 @@ export class HeaderComponent {
   }
 
   openModal() {
-    this.modalRef = this.modalService.open(ModalComponent, {
+    this.modalRef = this.modalService.open(ProductModalComponent, {
       modalClass: 'modal-dialog-centered'  //add this to make it centered
     })
   }

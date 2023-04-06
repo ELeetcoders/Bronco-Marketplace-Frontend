@@ -1,0 +1,35 @@
+/* .img-container {
+    position: relative;
+    height: 85vh;
+    align-items: center;
+  }
+  
+  .img-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.immediate.co.uk/production/volatile/sites/3/2021/06/iPad-Pro-with-Apple-Pencil-on-top-bd42e70.jpg?resize=768,574');
+    background-size: cover;
+    filter: blur(30px);
+  }
+  
+  .img-container img {
+    position: absolute;
+    width: auto;
+    max-height: 100%;
+    object-fit: cover;
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+   */
+
+   .img-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
