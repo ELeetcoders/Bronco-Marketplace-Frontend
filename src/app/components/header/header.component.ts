@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbDropdownDirective } from 'mdb-angular-ui-kit/dropdown';
 
 import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -20,6 +21,8 @@ export class HeaderComponent {
   searchTerm: string = '';
   modalRef: MdbModalRef<ProductModalComponent> | null = null;
   @Output() searchResults = new EventEmitter<any>();
+
+  @ViewChild('profile') dropdown: MdbDropdownDirective;
 
   constructor(
     private modalService: MdbModalService,

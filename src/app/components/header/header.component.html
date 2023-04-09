@@ -1,5 +1,17 @@
 <header>
+  <div class="title-container">
     <h1 routerLink="/" class="clickable">{{ title }}</h1>
+    <div mdbDropdown [animation]="false" class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownExampleAnimation" mdbDropdownToggle aria-expanded="false">
+        Dropdown button
+      </button>
+      <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownExampleAnimation">
+        <li><a class="dropdown-item" href="#">View profile</a></li>
+        <li><a class="dropdown-item" href="#">Messages</a></li>
+        <li><a class="dropdown-item" href="#">Logout</a></li>
+      </ul>
+    </div>
+  </div>
     <div class="buttons">
         <!-- save this for edit post -->
         <!-- <button class="btn btn-primary" style="width: 200px" (click)="openModal()">Create Post</button> -->

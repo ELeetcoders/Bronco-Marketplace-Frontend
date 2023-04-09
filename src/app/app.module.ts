@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdbDropdownModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
