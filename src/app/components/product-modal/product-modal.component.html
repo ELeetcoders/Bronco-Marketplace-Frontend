@@ -8,8 +8,15 @@
   ></button>
 </div> -->
   <div class="row">
-    <div class="col-md-8 img-container d-flex justify-content-center align-items-center" style="height: 100vh; background-image: url({{imageUrl}}); background-size: cover; position: relative;">
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; backdrop-filter: blur(30px); background-color: rgba(0, 0, 0, 0.3);">
+    <div class="col-md-8 img-container" style="height: 100vh; background-image: url({{imageUrl}}); background-size: cover; position: relative; display: flex;">
+      <button
+  type="button"
+  class="btn-close"
+  aria-label="Close"
+  (click)="closeModal()"
+  style="position: absolute; top: 10px; left: 20px; z-index: 2;"
+></button>
+      <div id="blur-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; backdrop-filter: blur(30px); background-color: rgba(0, 0, 0, 0.3);">
       </div>
       <img class="img-fluid" [src]="imageUrl"/>
     </div>

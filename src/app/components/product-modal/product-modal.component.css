@@ -34,6 +34,22 @@
   z-index: 1;
 }
 
+.img-container {
+  justify-content: right;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-container {
+  background-color: rgb(248,248,248);
+}
+
+/* .img-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+} */
+
 .modal-body {
   padding: 0;
 }

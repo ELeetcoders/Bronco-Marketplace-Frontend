@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -40,4 +40,9 @@ export class ProductModalComponent {
     //this.router.navigate(['/'])
   }
 
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKeydown(event: KeyboardEvent) {
+    this.closeModal();
+  }
+  
 }
