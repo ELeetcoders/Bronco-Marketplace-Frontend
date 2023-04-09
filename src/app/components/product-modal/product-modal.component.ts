@@ -35,7 +35,8 @@ export class ProductModalComponent {
     console.log(this.title)
     console.log('eeee')
     this.modalRef.close();
-    this.location.back()
+    //this.location.back();
+    this.location.replaceState('/')
     //this.modalRef.close();
     //this.router.navigate(['/'])
   }

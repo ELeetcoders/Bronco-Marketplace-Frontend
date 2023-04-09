@@ -8,7 +8,7 @@
   ></button>
 </div> -->
   <div class="row">
-    <div class="col-md-8 img-container" style="height: 100vh; background-image: url({{imageUrl}}); background-size: cover; position: relative; display: flex;">
+    <div class="col-md-9 img-container" style="height: 100vh; background-image: url({{imageUrl}}); background-size: cover; position: relative; display: flex;">
       <button
   type="button"
   class="btn-close"
@@ -20,10 +20,13 @@
       </div>
       <img class="img-fluid" [src]="imageUrl"/>
     </div>
-    <div class="col-md-4 detail-container">
-      <h2>{{title}}</h2>
-      <h2>{{description}}</h2>
-      <h2>{{price}}</h2>
+    <div class="col-md-3 detail-container">
+      <h2><b>{{title}}</b></h2>
+      <h3>{{price}}</h3>
+      <h3>{{description}}</h3>
+      <div>
+        <h2>Seller Info:</h2>
+      </div>
     </div>
   </div>
 
