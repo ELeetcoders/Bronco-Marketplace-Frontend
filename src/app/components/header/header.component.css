@@ -14,7 +14,7 @@ header {
 }
 
 h1 {
-    padding-top: 2rem;
+    /* padding-top: 2rem; */
 }
 
 .title-container {
@@ -25,8 +25,8 @@ h1 {
   }
   
   .title-container h1 {
-    flex-grow: 1;
-    transform: translateX(92.75px)
+    /* flex-grow: 1; */
+    /* transform: translateX(92.75px) */
   }
   
   .dropdown {
