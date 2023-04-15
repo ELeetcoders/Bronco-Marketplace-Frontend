@@ -42,14 +42,19 @@ export class ProductComponent {
       this.location.subscribe((loc) => {
         console.log(loc)
         if (loc.url === '') {
-          this.modalRef?.close()
+          if (this.modalRef) {
+            this.modalRef?.close()
+          }
+          else {
+          this.location.replaceState('/')
+          }
           //this.location.go('/', '', this.router.parseUrl(this.router.url).queryParams);
           //this.location.back()
         }
         else if (loc.url === '/product/' + this.id) {
-          this.modalRef = this.modalService.open(ProductModalComponent, {
-            modalClass: 'modal-fullscreen'
-          })
+          // this.modalRef = this.modalService.open(ProductModalComponent, {
+          //   modalClass: 'modal-fullscreen'
+          // })
           //this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
           //this.location.forward()
         }
@@ -80,8 +85,8 @@ export class ProductComponent {
     this.modalRef = this.modalService.open(ProductModalComponent, {
       modalClass: 'modal-fullscreen'
     })
-    this.location.replaceState('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
-    //this.location.
+    //this.location.replaceState('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
+    this.location.go('/product/' + this.id)
     this.ProductDetailService.imageUrl = this.imageUrl
     this.ProductDetailService.price = this.price
     this.ProductDetailService.description = this.description

@@ -28,9 +28,9 @@ export class HomeComponent {
       this.isSearchEndpoint = this.route.snapshot.url[0]?.path === 'search';
     
     /* Use these 3 lines for mock-products */
-    this.products = PRODUCTS;
-    console.log(PRODUCTS)
-    this.categories = Object.keys(this.products);
+    // this.products = PRODUCTS;
+    // console.log(PRODUCTS)
+    // this.categories = Object.keys(this.products);
   }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class HomeComponent {
         this.handleSearch(this.query);
       } else {
         /* Comment this out for mock-products */
-        //this.getAllProducts();
+        this.getAllProducts();
       }
     });
   }
