@@ -7,20 +7,26 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ProductComponent } from './components/product/product.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ProductModalComponent } from './components/product-modal/product-modal.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from  '@angular/material/select'
+import { MatSelectModule } from  '@angular/material/select';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component'
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'create-post', component: CreatePostComponent}
+  {path: 'create-post', component: CreatePostComponent},
+  {path: 'search', component: HomeComponent},
+  {path: 'product/:id', component: ProductPageComponent},
+  { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
 @NgModule({
@@ -29,9 +35,11 @@ const appRoutes: Routes = [
     HeaderComponent,
     InventoryComponent,
     ProductComponent,
-    ModalComponent,
+    ProductModalComponent,
     HomeComponent,
     CreatePostComponent,
+    ProductPageComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +51,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdbDropdownModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,4 +1,4 @@
-<h1>Bronco Marketplace</h1>
+<h1 routerLink="/" class="clickable">Bronco Marketplace</h1>
 <h2>Create Post</h2>
 
 <div style="display: flex">
@@ -31,7 +31,7 @@
     </mat-form-field>
 
     <mdb-form-control style="width: 15vw; margin-left: auto;">
-      <input mdbInput type="text" id="form1" class="form-control" placeholder="$0.00" [(ngModel)]="price"/>
+      <input mdbInput type="text" id="form1" class="form-control" placeholder="$0.00" [(ngModel)]="price" (input)="formatDollarValue($event)"/>
       <label mdbLabel class="form-label" for="form1">Price</label>
     </mdb-form-control>
     </div>  
@@ -44,7 +44,7 @@
 
 
 <div style="float: right;" class="creating-card">
-  <app-product title={{title}} description={{description}} [imageUrl]="imageUrl"></app-product>
+  <app-product title={{title}} description={{description}} price={{price}} [imageUrl]="imageUrl"></app-product>
 </div>
 </div>
 <div class="button-group">
