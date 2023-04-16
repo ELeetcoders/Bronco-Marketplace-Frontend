@@ -86,7 +86,15 @@ export class ProductComponent {
       modalClass: 'modal-fullscreen'
     })
     //this.location.replaceState('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
-    this.location.go('/product/' + this.id)
+    //this.location.go('/product/' + this.id)
+
+    const currentPath = this.location.path();
+    if (history.state !== null && currentPath.includes('/product/')) {
+      this.location.replaceState(window.history.state, document.title, window.location.href);
+    } else {
+      this.location.go('/product/' + this.id);
+    }
+
     this.ProductDetailService.imageUrl = this.imageUrl
     this.ProductDetailService.price = this.price
     this.ProductDetailService.description = this.description

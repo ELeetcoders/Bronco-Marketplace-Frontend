@@ -185,7 +185,7 @@ export class CreatePostComponent {
       desc: this.description,
       category: this.selectedCategory.toUpperCase(),
       price: this.price.replace("$",""), // You will need to update this to get the actual price value from the input field
-      imageURL: this.imageUrl //.replace("data:image/jpeg;base64,", "")
+      imageUrl: this.imageUrl //.replace("data:image/jpeg;base64,", "")
     };
   
     // Send the HTTP POST request to the server
