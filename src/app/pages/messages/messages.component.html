@@ -1,0 +1,22 @@
+<h1 routerLink="/" class="clickable">Bronco Marketplace</h1>
+<div class="messages-container">
+    <div class="chat-list mat-elevation-z5">
+        <div class="search-input">
+            <mat-form-field>
+                <mat-label>Search for users</mat-label>
+                <input
+                    matInput 
+                    [formControl]="searchControl"
+                    [matAutocomplete]="users"
+                />
+            </mat-form-field>
+            <mat-autocomplete #users="matAutocomplete">
+                <mat-option *ngFor="let user of users$ | async">
+                    {{user?.firstname + " " + user?.lastname}}
+                    <!-- {{user}} -->
+                </mat-option> 
+            </mat-autocomplete>
+        </div>
+    </div>
+    <div class="messages mat-elevation-z5"></div>
+</div>

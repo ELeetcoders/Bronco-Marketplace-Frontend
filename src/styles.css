@@ -11,3 +11,7 @@ body {
 .clickable {
   cursor: pointer;
 }
+
+/* .container {
+  max-width: 50vw !important;
+} */

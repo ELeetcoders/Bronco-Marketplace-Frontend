@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import {MatInputModule} from '@angular/material/input';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,13 +21,19 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from  '@angular/material/select';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component'
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MessagesComponent } from './pages/messages/messages.component'
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'create-post', component: CreatePostComponent},
   {path: 'search', component: HomeComponent},
   {path: 'product/:id', component: ProductPageComponent},
+  {path: 'messages', component: MessagesComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -40,6 +48,7 @@ const appRoutes: Routes = [
     CreatePostComponent,
     ProductPageComponent,
     NotFoundComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MdbDropdownModule
+    MdbDropdownModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore())
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

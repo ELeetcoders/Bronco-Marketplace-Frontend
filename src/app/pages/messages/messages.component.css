@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+
+.messages-container {
+    display: flex;
+    height: 85vh
+}
+
+.chat-list {
+    width: 40%;
+    margin: 16px;
+    background: #c5cae9;
+    border-radius: 16px;
+}
+
+.messages {
+    width: 60%;
+    margin: 16px;
+    border-radius: 16px;
+}
+
+.search-input {
+    margin: 24px;
+}
