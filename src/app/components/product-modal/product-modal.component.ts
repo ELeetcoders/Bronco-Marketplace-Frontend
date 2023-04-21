@@ -34,9 +34,9 @@ export class ProductModalComponent {
     // make it so that it changes to the base URL using location object
     console.log(this.title)
     console.log('eeee')
-    this.modalRef.close();
-    //this.location.back();
-    this.location.replaceState('/')
+    //this.modalRef.close();
+    this.location.back();
+    //this.location.replaceState('/')
     //this.modalRef.close();
     //this.router.navigate(['/'])
   }
