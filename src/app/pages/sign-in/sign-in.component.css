@@ -1,0 +1,26 @@
+h1 {
+    /* padding-top: 2rem; */
+    text-align: center;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+h2 {
+    padding-bottom: 2rem;
+}
+
+mdb-form-control {
+    margin-bottom: 2rem;
+    width: 40vw;
+}
+
+.button-group {
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group > div {
+    margin: 0 10px;
+}
