@@ -7,3 +7,13 @@
   margin-right: 2vw;
   margin-top: 2vw;
 }
+
+.signup-buttons {
+  text-align: right;
+  position: relative;
+}
+
+.sign-in, .sign-up {
+  margin-right: 2vw;
+  margin-top: 2vw;
+}

@@ -1,5 +1,5 @@
 <!-- <h1>{{ title }}</h1> -->
-<div mdbDropdown [animation]="false" class="dropdown">
+<div mdbDropdown [animation]="false" class="dropdown" *ngIf="userService.email != 'Not signed in' ">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownExampleAnimation" mdbDropdownToggle aria-expanded="false">
       {{userService.email}}
     </button>
@@ -9,6 +9,17 @@
       <li><a class="dropdown-item" (click)="handleSignout()" >Logout</a></li>
     </ul>
 </div>
+
+<div class="signup-buttons">
+  <button class="btn btn-primary sign-in" routerLink="/sign-in">
+    Sign in
+  </button>
+  <button class="btn btn-primary sign-up">
+    Sign up
+  </button>
+</div>
+
+
 
 <div class="container">
     <router-outlet></router-outlet>

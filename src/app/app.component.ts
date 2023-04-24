@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { UserService } from './services/UserService';
 import { HttpClient } from '@angular/common/http';
 import { Observer } from 'rxjs';
@@ -13,6 +13,7 @@ export class AppComponent {
   constructor(
     public userService: UserService,
     private http: HttpClient,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   handleSignout() {
@@ -21,6 +22,7 @@ export class AppComponent {
     const observer: Observer<any> = {
       next: response => {
           this.userService.email = "Not signed in"
+          this.cdRef.detectChanges();
       },
       error: error => console.error(error),
       complete: () => console.log('complete')
