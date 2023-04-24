@@ -1,12 +1,12 @@
 <!-- <h1>{{ title }}</h1> -->
 <div mdbDropdown [animation]="false" class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownExampleAnimation" mdbDropdownToggle aria-expanded="false">
-      Dropdown button
+      {{userService.email}}
     </button>
     <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownExampleAnimation">
-      <li><a class="dropdown-item" href="#">View profile</a></li>
-      <li><a class="dropdown-item" href="#">Messages</a></li>
-      <li><a class="dropdown-item" href="#">Logout</a></li>
+      <li><a class="dropdown-item" >View profile</a></li>
+      <li><a class="dropdown-item" routerLink="/messages" >Messages</a></li>
+      <li><a class="dropdown-item" (click)="handleSignout()" >Logout</a></li>
     </ul>
 </div>
 

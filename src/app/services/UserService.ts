@@ -11,7 +11,7 @@ export class UserService {
   public username: String = '';
   public firstName: String = '';
   public lastName: String = '';
-  public email: String = '';
+  public email: String = 'Not signed in';
 
   private firestore: Firestore
 

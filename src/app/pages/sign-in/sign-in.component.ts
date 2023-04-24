@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observer } from 'rxjs';
+import { UserService } from 'src/app/services/UserService';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,10 +10,13 @@ import { Observer } from 'rxjs';
 })
 export class SignInComponent {
 
-  email: String | null= null;
-  password: String | null= null;
+  email: String = '';
+  password: String = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+    ) {}
 
   testAuth() {
     const observer: Observer<any> = {
@@ -48,6 +52,9 @@ export class SignInComponent {
           //document.cookie = cookie;
         //}
         console.log(response);
+        if (response != "FAIL" ) {
+          this.userService.email = this.email
+        }
       },
       error: error => console.error(error),
       complete: () => console.log('complete')
