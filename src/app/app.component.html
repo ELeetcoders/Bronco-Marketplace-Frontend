@@ -1,5 +1,5 @@
 <!-- <h1>{{ title }}</h1> -->
-<div mdbDropdown [animation]="false" class="dropdown" *ngIf="userService.email != 'Not signed in' ">
+<div mdbDropdown [animation]="false" class="dropdown" *ngIf="userService.email != 'Not signed in'; else signedOut">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownExampleAnimation" mdbDropdownToggle aria-expanded="false">
       {{userService.email}}
     </button>
@@ -10,7 +10,7 @@
     </ul>
 </div>
 
-<div class="signup-buttons">
+<div class="signup-buttons" *ngIf="userService.email == 'Not signed in' " #signedOut>
   <button class="btn btn-primary sign-in" routerLink="/sign-in">
     Sign in
   </button>
