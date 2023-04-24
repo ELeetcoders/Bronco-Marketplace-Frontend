@@ -40,6 +40,7 @@ export class AppComponent {
       next: response => {
         if (response.status != 401 ) {
           this.userService.email = response
+          this.userService.signedIn = true
         }
       },
       error: error => console.error(error),
