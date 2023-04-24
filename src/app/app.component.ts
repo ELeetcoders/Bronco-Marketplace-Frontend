@@ -17,6 +17,7 @@ export class AppComponent {
 
   handleSignout() {
     const options = { withCredentials: true };
+    const data = {}
     const observer: Observer<any> = {
       next: response => {
           this.userService.email = "Not signed in"
@@ -24,7 +25,7 @@ export class AppComponent {
       error: error => console.error(error),
       complete: () => console.log('complete')
     };
-    this.http.get('http://api.broncomarketplace.com:8080/login/sign-out', options).subscribe(observer);
+    this.http.post('http://api.broncomarketplace.com:8080/login/sign-out', data, options).subscribe(observer);
   }
 
   ngOnInit(): void {
