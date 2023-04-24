@@ -1,22 +1,22 @@
 <h1 routerLink="/" class="clickable">Bronco Marketplace</h1>
 <h2>Sign in</h2>
 
-<!-- <mdb-form-control>
-    <input mdbInput type="text" id="form1" class="form-control" />
+<mdb-form-control>
+    <input mdbInput type="text" id="form1" class="form-control" [(ngModel)]="firstname"/>
     <label mdbLabel class="form-label" for="form1">First Name</label>
   </mdb-form-control>
 <mdb-form-control>
-    <input mdbInput type="text" id="form1" class="form-control" />
+    <input mdbInput type="text" id="form1" class="form-control" [(ngModel)]="lastname"/>
     <label mdbLabel class="form-label" for="form1">Last Name</label>
-  </mdb-form-control> -->
+  </mdb-form-control>
 <mdb-form-control>
     <input mdbInput type="email" id="typeEmail" class="form-control" [(ngModel)]="email"/>
     <label mdbLabel class="form-label" for="typeEmail">CPP Email</label>
 </mdb-form-control>
-<!-- <mdb-form-control>
-    <input mdbInput type="text" id="form1" class="form-control" />
+<mdb-form-control>
+    <input mdbInput type="text" id="form1" class="form-control" [(ngModel)]="username"/>
     <label mdbLabel class="form-label" for="form1">Username</label>
-  </mdb-form-control> -->
+  </mdb-form-control>
 <mdb-form-control>
     <input mdbInput type="password" id="typePassword" class="form-control" [(ngModel)]="password"/>
     <label mdbLabel class="form-label" for="typePassword">Password</label>
@@ -27,6 +27,6 @@
       <button type="button" class="btn btn-primary btn-lg" routerLink="/">Cancel</button>
     </div>
     <div class="submit">
-      <button type="button" class="btn btn-primary btn-lg" (click)="onSignInClick()" routerLink="/">Sign in</button>
+      <button type="button" class="btn btn-primary btn-lg" (click)="onSignInClick()" routerLink="/">Sign up</button>
     </div>
 </div>

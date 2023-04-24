@@ -28,6 +28,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   {path: 'product/:id', component: ProductPageComponent},
   {path: 'messages', component: MessagesComponent},
   {path: 'sign-in', component: SignInComponent},
+  {path: 'sign-up', component: SignUpComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     MessagesComponent,
     SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

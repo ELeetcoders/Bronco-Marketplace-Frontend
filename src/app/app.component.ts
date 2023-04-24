@@ -21,8 +21,11 @@ export class AppComponent {
     const data = {}
     const observer: Observer<any> = {
       next: response => {
-          this.userService.email = "Not signed in"
-          this.cdRef.detectChanges();
+          this.userService.email = ''
+          console.log(this.userService.signedIn)
+          this.userService.signedIn = false
+          console.log(this.userService.signedIn)
+          //this.cdRef.detectChanges();
       },
       error: error => console.error(error),
       complete: () => console.log('complete')
