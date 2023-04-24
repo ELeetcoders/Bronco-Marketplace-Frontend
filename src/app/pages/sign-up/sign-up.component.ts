@@ -51,6 +51,6 @@ export class SignUpComponent {
 
     const options = { withCredentials: true };
 
-    this.http.post('http://api.broncomarketplace.com:8080/login/sign-in', data, options).subscribe(observer);
+    this.http.post('http://api.broncomarketplace.com:8080/login/sign-up', data, options).subscribe(observer);
   }
 }
