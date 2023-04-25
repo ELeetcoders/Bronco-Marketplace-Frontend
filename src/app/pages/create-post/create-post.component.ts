@@ -5,6 +5,7 @@ import heic2any from 'heic2any';
 import { HttpClient } from '@angular/common/http';
 import { Observer } from 'rxjs';
 import Compressor from 'compressorjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
@@ -18,6 +19,7 @@ export class CreatePostComponent {
   productImage: File;
   imageUrl: string = '';
   price: string = '';
+  fetching: boolean = false;
   categories: any[] = [
     'Textbooks',
     'Tech',
@@ -29,7 +31,7 @@ export class CreatePostComponent {
   maxLength = 100;
   //url = ''
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef ) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private router: Router ) {}
 
   ngOnInit(): void {
     this.descriptionFormControl.valueChanges.subscribe((value) => {
@@ -175,13 +177,6 @@ export class CreatePostComponent {
     }
     const data = {
       name: this.title,
-      user: {
-        email: "mmt@cpp.edu",
-        username: "michael8pho",
-        password: "123",
-        firstname: "Michael",
-        lastname: "Truong"
-      },
       desc: this.description,
       category: this.selectedCategory.toUpperCase(),
       price: this.price.replace("$",""), // You will need to update this to get the actual price value from the input field
@@ -191,12 +186,21 @@ export class CreatePostComponent {
   
     // Send the HTTP POST request to the server
     const observer: Observer<any> = {
-      next: response => console.log(response),
-      error: error => console.error(error),
+      next: response => {
+        this.fetching = false
+        this.router.navigate(['/'])
+        console.log(response)
+      },
+      error: error => {
+        this.fetching = false
+        console.error(error)
+        //this.router.navigate(['/'])
+      },
       complete: () => console.log('complete')
     };
 
     this.http.post('http://api.broncomarketplace.com:8080/user/create-listing', data, options).subscribe(observer);
+    this.fetching = true
   }
   
 }

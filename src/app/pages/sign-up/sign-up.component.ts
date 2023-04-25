@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
 import { UserService } from 'src/app/services/UserService';
 
@@ -16,9 +17,12 @@ export class SignUpComponent {
   username: String = '';
   password: String = '';
 
+  fetching: boolean = false;
+
   constructor(
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
     ) {}
 
   onSignInClick() {
@@ -43,14 +47,19 @@ export class SignUpComponent {
         if (response != "FAIL" ) {
           this.userService.email = this.email
           this.userService.signedIn = true
+          this.router.navigate(['/'])
         }
       },
-      error: error => console.error(error),
+      error: error => {
+        this.fetching = false
+        console.error(error)
+      },
       complete: () => console.log('complete')
     };
 
     const options = { withCredentials: true };
 
     this.http.post('http://api.broncomarketplace.com:8080/login/sign-up', data, options).subscribe(observer);
+    this.fetching = true
   }
 }

@@ -51,8 +51,14 @@
   <div>
     <button type="button" class="btn btn-primary btn-lg" routerLink="/">Cancel</button>
   </div>
-  <div class="submit">
-    <button type="button" class="btn btn-primary btn-lg" (click)="onPublishClick()" routerLink="/">Publish</button>
+  <div class="submit" *ngIf="!fetching">
+    <button type="button" class="btn btn-primary btn-lg" (click)="onPublishClick()">Publish</button>
+  </div>
+  <div class="submit" *ngIf="fetching">
+    <button class="btn btn-primary btn-lg" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
   </div>
 </div>
 
