@@ -37,6 +37,7 @@ export class InventoryComponent {
     const swiperParams = {
       // slidesPerView: 1,
       slidesPerGroup:3,
+      spaceBetween: 10,
     // spaceBetween: 25,
     //loop: true,
     // centerSlide: 'true',
@@ -54,15 +55,19 @@ export class InventoryComponent {
     breakpoints:{
         0: {
             slidesPerView: 3,
+            spaceBetween: 10,
         },
         600: {
             slidesPerView: 3,
+            spaceBetween: 10,
         },
         950: {
             slidesPerView: 4,
+            spaceBetween: 10,
         },
         1500: {
           slidesPerView: 4,
+          spaceBetween: 10,
         },
     },
 
