@@ -187,6 +187,7 @@ export class CreatePostComponent {
       price: this.price.replace("$",""), // You will need to update this to get the actual price value from the input field
       imageUrl: this.imageUrl //.replace("data:image/jpeg;base64,", "")
     };
+    const options = { withCredentials: true };
   
     // Send the HTTP POST request to the server
     const observer: Observer<any> = {
@@ -195,7 +196,7 @@ export class CreatePostComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.post('http://api.broncomarketplace.com:8080/user/create-listing', data).subscribe(observer);
+    this.http.post('http://api.broncomarketplace.com:8080/user/create-listing', data, options).subscribe(observer);
   }
   
 }
