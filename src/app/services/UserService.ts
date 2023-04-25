@@ -21,9 +21,9 @@ export class UserService {
     this.firestore = firestore
   }
 
-  get currentUser$(): Observable<any[]> {
-    const ref = doc(this.firestore, 'user', 'mmt@cpp.edu')
-    return docData(ref) as Observable<any[]>;
+  get currentUser$(): Observable<any> {
+    const ref = doc(this.firestore, 'user', this.email as string)
+    return docData(ref) as Observable<any>;
   }
 
   get allUsers$(): Observable<any[]> {

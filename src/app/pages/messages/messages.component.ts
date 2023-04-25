@@ -20,15 +20,17 @@ export class MessagesComponent {
     this.searchControl.valueChanges.pipe(startWith(''))]).pipe(
       map(([users, user, searchString]) => {
         return users.filter((u) =>
-          u.firstname?.toLowerCase().includes(searchString!.toLowerCase())
-        );
+          u.username?.toLowerCase().includes(searchString!.toLowerCase()) &&
+          u.username !== user.username
+          )
       })
     );
-
+    
   constructor(public UserService: UserService) {
-    // this.user$.subscribe((value) => {
-    //   console.log(value);
-    // });
+
+     this.user$.subscribe((value) => {
+       console.log(value);
+     });
   }
 
   ngOnInit(): void {}

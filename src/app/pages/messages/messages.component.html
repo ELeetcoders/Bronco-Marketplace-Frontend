@@ -12,7 +12,7 @@
             </mat-form-field>
             <mat-autocomplete #users="matAutocomplete">
                 <mat-option *ngFor="let user of users$ | async">
-                    {{user?.firstname + " " + user?.lastname}}
+                    {{user?.username}}
                     <!-- {{user}} -->
                 </mat-option> 
             </mat-autocomplete>
