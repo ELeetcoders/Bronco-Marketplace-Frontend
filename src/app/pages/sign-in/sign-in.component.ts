@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observer } from 'rxjs';
 import { UserService } from 'src/app/services/UserService';
 
@@ -15,8 +16,16 @@ export class SignInComponent {
 
   constructor(
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar
     ) {}
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, '', {
+      duration: 2000,
+      verticalPosition: 'top',
+   });
+  }
 
   testAuth() {
     const observer: Observer<any> = {
@@ -55,6 +64,10 @@ export class SignInComponent {
         if (response != "FAIL" ) {
           this.userService.email = this.email
           this.userService.signedIn = true
+          this.openSnackBar("Logged in", "Close")
+        }
+        else {
+          this.openSnackBar("test", "here")
         }
       },
       error: error => console.error(error),

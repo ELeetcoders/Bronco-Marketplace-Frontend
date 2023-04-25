@@ -115,10 +115,17 @@ swiper-container{
   background-color: #4070F4;
 }
 
-.swiper-button {
+.swiper-button-right {
   font-size: 35px;
   padding-top: 200px;
   padding-bottom: 200px;
-  padding-left: 20px;
-  padding-right: 20px;
+  /* padding-left: 20px; */
+}
+
+.swiper-button-left {
+  font-size: 35px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  /* padding-right: 20px; */
+  /* background-color: rgba(66, 96, 245, 0.1); */
 }

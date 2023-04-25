@@ -24,3 +24,9 @@ mdb-form-control {
 .button-group > div {
     margin: 0 10px;
 }
+
+::ng-deep .mat-mdc-snack-bar-container {
+    /* --mat-mdc-snack-bar-button-color: red; */
+    --mdc-snackbar-container-color: rgb(214,240,224);
+    --mdc-snackbar-supporting-text-color: rgb(13,104,100);
+  }

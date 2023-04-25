@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import {MatInputModule} from '@angular/material/input';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
+import {MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
     MdbDropdownModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore())
   ],
