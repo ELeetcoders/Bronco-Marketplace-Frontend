@@ -3,8 +3,6 @@
 @import "~swiper/css/navigation";
 @import "~swiper/css/pagination";
 
-
-
 .swiper-button-disabled {
   display: none;
 }
@@ -115,4 +113,12 @@ swiper-container{
 }
 .swiper-pagination-bullet-active{
   background-color: #4070F4;
+}
+
+.swiper-button {
+  font-size: 35px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
