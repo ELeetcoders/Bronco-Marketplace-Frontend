@@ -13,6 +13,7 @@ export class UserService {
   public lastName: String = '';
   public email: String = '';
   public signedIn: boolean = false;
+  public profilePic: any = '';
 
   private firestore: Firestore
 

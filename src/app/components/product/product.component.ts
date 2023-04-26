@@ -43,12 +43,17 @@ export class ProductComponent {
 
       this.location.subscribe((loc) => {
         console.log(loc)
-        if (loc.url === '') {
+        if (loc.url === '' || loc.url == '/create-post') {
           if (this.modalRef) {
             this.modalRef?.close()
           }
           else {
-          this.location.replaceState('/')
+            if (loc.url == '/create-post') {
+              this.location.replaceState('/create-post')
+            }
+            else if (loc.url = '/') {
+              this.location.replaceState('/')
+            }
           }
           //this.location.go('/', '', this.router.parseUrl(this.router.url).queryParams);
           //this.location.back()

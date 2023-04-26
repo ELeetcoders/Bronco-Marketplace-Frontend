@@ -11,6 +11,8 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import {MatInputModule} from '@angular/material/input';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
 import {MatSnackBarModule } from '@angular/material/snack-bar';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -30,6 +32,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { CropperModalComponent } from './components/cropper-modal/cropper-modal.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -39,6 +43,7 @@ const appRoutes: Routes = [
   {path: 'messages', component: MessagesComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
+  {path: 'edit-profile', component: EditProfileComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -56,6 +61,8 @@ const appRoutes: Routes = [
     MessagesComponent,
     SignInComponent,
     SignUpComponent,
+    CropperModalComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +79,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    ImageCropperModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore())
   ],
