@@ -23,6 +23,8 @@ export class ProductComponent {
   @Input() description: string = '';
   @Input() price: string = '';
 
+  email: string = '';
+
   id: string = ''; 
   //imageUrl: string = '';
 
@@ -68,6 +70,7 @@ export class ProductComponent {
       this.description = this.product.desc;
       this.price = "$" + this.product.price.toString()
       this.id = this.product.id;
+      this.email = this.product.email
       // if (!this.imageUrl.includes("data:image/jpeg;base64,")) {
       //   console.log(this.imageUrl)
       //   this.imageUrl = "data:image/jpeg;base64," + this.imageUrl
@@ -99,6 +102,7 @@ export class ProductComponent {
     this.ProductDetailService.price = this.price
     this.ProductDetailService.description = this.description
     this.ProductDetailService.title = this.title
+    this.ProductDetailService.email = this.email
     //this.router.navigate(['/product/' + this.id])
   }
 

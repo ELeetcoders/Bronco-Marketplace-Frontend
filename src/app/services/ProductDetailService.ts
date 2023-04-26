@@ -9,4 +9,5 @@ export class ProductDetailService {
     public title: string = '';
     public description: string = '';
     public price: string = '';
+    public email: string = '';
 }

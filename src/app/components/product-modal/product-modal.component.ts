@@ -15,6 +15,7 @@ export class ProductModalComponent {
   title: string = '';
   description: string = '';
   price: string = '';
+  email: string = '';
 
   constructor(
     public modalRef: MdbModalRef<ProductModalComponent>,
@@ -28,6 +29,7 @@ export class ProductModalComponent {
     this.description = this.ProductDetailService.description;
     this.title = this.ProductDetailService.title;
     this.price = this.ProductDetailService.price;
+    this.email = this.ProductDetailService.email
   }
 
   closeModal() {
