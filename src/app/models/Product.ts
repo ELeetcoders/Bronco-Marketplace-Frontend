@@ -8,5 +8,5 @@ export interface Product {
     imageUrl: string;
     firstname: string;
     lastname: string;
-    username: string
+    username: string;
 }

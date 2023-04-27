@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Firestore, collectionData, collection, query, where, doc, docData } from '@angular/fire/firestore';
 import { orderBy } from '@firebase/firestore';
+import { User } from '../models/User';
 
 
 @Injectable({
@@ -22,15 +23,15 @@ export class UserService {
     this.firestore = firestore
   }
 
-  get currentUser$(): Observable<any> {
-    const ref = doc(this.firestore, 'user', this.email as string)
-    return docData(ref) as Observable<any>;
+  get currentUser$(): Observable<User> {
+    const ref = doc(this.firestore, 'user', 'ugaeta@cpp.edu')
+    return docData(ref) as Observable<User>
   }
 
-  get allUsers$(): Observable<any[]> {
+  get allUsers$(): Observable<User[]> {
     let ref = collection(this.firestore, 'user');
     let queryall= query(ref);
-    return collectionData(queryall) as Observable<any[]>
+    return collectionData(queryall) as Observable<User[]>
   }
 
 

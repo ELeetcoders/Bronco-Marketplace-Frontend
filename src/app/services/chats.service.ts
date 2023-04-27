@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, documentId } from '@angular/fire/firestore';
 import { Observable, concatMap, map, take } from 'rxjs';
 import { UserService } from './UserService';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,20 @@ export class ChatsService {
 
   }
 
-  createChat(otherUser: any) : Observable<string> {
+  createChat(otherUser: User) : Observable<string> {
     const ref = collection(this.firestore, 'chats');
     return this.userService.currentUser$.pipe(
       take(1),
       concatMap(user => addDoc(ref, {
-        userIds: [user?.email, otherUser?.email],
+        userEmails: [user.email, otherUser.email],
         users: [
           {
-            username: user?.username ?? '',
-            profilePic: user?.profilePic ?? ''
+            username: user.username ?? '',
+            profilepic: user.profilepic ?? ''
           },
           {
-            username: user?.username ?? '',
-            profilePic: user?.profilePic ?? ''
+            username: otherUser.username ?? '',
+            profilepic : user.profilepic ?? ''
           }
         ]
       })),

@@ -12,8 +12,8 @@ import { UserService } from 'src/app/services/UserService';
 })
 export class SignInComponent {
 
-  email: String = '';
-  password: String = '';
+  email: string = '';
+  password: string = '';
   fetching: boolean = false;
 
   constructor(
@@ -45,7 +45,7 @@ export class SignInComponent {
       complete: () => console.log('complete')
     };
     const options = { withCredentials: true };
-    this.http.get('http://api.broncomarketplace.com:8080/michael', options).subscribe(observer);
+    this.http.get('http://localhost:8080/michael', options).subscribe(observer);
   }
 
   onSignInClick() {
