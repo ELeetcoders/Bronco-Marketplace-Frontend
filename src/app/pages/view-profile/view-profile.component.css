@@ -8,6 +8,7 @@
   .flex-container > div {
     width: calc(25% - 10px);
     margin-bottom: 20px;
+    max-width: 290px; /* adjust as needed */
   }
   
   @media (max-width: 1550px) {
@@ -26,4 +27,17 @@
     .flex-container > div {
       width: 100%;
     }
+  }
+
+  h1 {
+    /* padding-top: 2rem; */
+    text-align: center;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+#spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
