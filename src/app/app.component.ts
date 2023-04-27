@@ -35,6 +35,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     console.log("urmom")
+    console.log("it be like that")
     const options = { withCredentials: true };
     const observer: Observer<any> = {
       next: response => {

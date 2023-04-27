@@ -5,16 +5,17 @@
             <mat-form-field>
                 <mat-label>Search for users</mat-label>
                 <input
-                    matInput 
+                    matInput
                     [formControl]="searchControl"
                     [matAutocomplete]="users"
                 />
             </mat-form-field>
             <mat-autocomplete #users="matAutocomplete">
-                <mat-option *ngFor="let user of users$ | async">
+                <mat-option *ngFor="let user of users$ | async"
+                 (click)="createChat(user)"
+                 >
                     {{user?.username}}
-                    <!-- {{user}} -->
-                </mat-option> 
+                </mat-option>
             </mat-autocomplete>
         </div>
     </div>
