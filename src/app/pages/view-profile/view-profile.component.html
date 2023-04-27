@@ -1,0 +1,13 @@
+<p>view-profile works!</p>
+
+<div *ngIf="loadingService.loading" id="spinner" style="height: 55vh;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+<div class="flex-container" *ngIf="!loadingService.loading">
+    <div *ngFor="let product of products">
+        <app-product [product]="product"></app-product>
+    </div>
+</div>

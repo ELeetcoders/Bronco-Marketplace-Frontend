@@ -102,6 +102,7 @@ export class CreatePostComponent {
       const file = event.target.files[0];
       const extension = file.name.split('.').pop();
       const isHeic = extension.toLowerCase() === 'heic';
+      const isPng = extension.toLowerCase() === 'png';
       console.log(isHeic);
   
       if (isHeic) {
@@ -124,6 +125,30 @@ export class CreatePostComponent {
             };
           });
   
+      } else if (isPng) {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx: any = canvas.getContext('2d');
+    
+            canvas.width = img.width;
+            canvas.height = img.height;
+    
+            ctx.drawImage(img, 0, 0);
+    
+            canvas.toBlob((blob: any) => {
+              console.log(blob);
+              this.productImage = blob;
+              const reader = new FileReader();
+              reader.readAsDataURL(blob); // read file as data url
+              reader.onload = (event) => { // called once readAsDataURL is completed
+                if (event && event.target) {
+                  this.imageUrl = event.target.result as string;
+                  console.log(this.imageUrl);
+                }
+              };
+            }, 'image/jpeg', 0.3);
+          };
       } else {
         // Check if the file size exceeds 1MB
         console.log("greater")

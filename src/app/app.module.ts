@@ -34,6 +34,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CropperModalComponent } from './components/cropper-modal/cropper-modal.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'edit-profile', component: EditProfileComponent},
+  {path: 'view-profile', component: ViewProfileComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -63,6 +65,7 @@ const appRoutes: Routes = [
     SignUpComponent,
     CropperModalComponent,
     EditProfileComponent,
+    ViewProfileComponent,
   ],
   imports: [
     BrowserModule,

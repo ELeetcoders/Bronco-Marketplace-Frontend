@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UserService } from 'src/app/services/UserService';
+import Compressor from 'compressorjs';
+
 
 @Component({
   selector: 'app-cropper-modal',
