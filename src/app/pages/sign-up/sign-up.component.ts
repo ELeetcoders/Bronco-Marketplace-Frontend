@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
+import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -45,7 +46,9 @@ export class SignUpComponent {
         //}
         console.log(response);
         if (response != "FAIL" ) {
+          let user: User = response
           this.userService.email = this.email
+          this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
           this.userService.signedIn = true
           this.router.navigate(['/'])
         }

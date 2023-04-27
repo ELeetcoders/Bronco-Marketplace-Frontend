@@ -45,7 +45,7 @@ export class CropperModalComponent {
     }
 
     updateProfilePic() {
-      const userRef = doc(collection(this.firestore, 'user'), 'mmt@cpp.edu');
+      const userRef = doc(collection(this.firestore, 'user'), this.userService.email);
       updateDoc(userRef, { profilePic: this.croppedImage })
         .then(() => {
           console.log('Document updated successfully!');

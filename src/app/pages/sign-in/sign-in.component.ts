@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
+import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -15,6 +16,7 @@ export class SignInComponent {
   email: string = '';
   password: string = '';
   fetching: boolean = false;
+  user: User
 
   constructor(
     private http: HttpClient,
@@ -66,8 +68,10 @@ export class SignInComponent {
         console.log(response);
         this.fetching = false
         if (response != "FAIL" ) {
+          let user: User = response
           this.userService.email = this.email
           this.userService.signedIn = true
+          this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
           this.router.navigate(['/'])
           this.openSnackBar("Successful sign in", "Close")
         }
