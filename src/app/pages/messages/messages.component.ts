@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, map, startWith } from 'rxjs';
 import { UserService } from 'src/app/services/UserService';
+import { ChatsService } from 'src/app/services/chats.service';
 
 @Component({
   selector: 'app-messages',
@@ -26,7 +27,7 @@ export class MessagesComponent {
       })
     );
     
-  constructor(public UserService: UserService) {
+  constructor(public UserService: UserService, private chatsService : ChatsService) {
 
      this.user$.subscribe((value) => {
        console.log(value);
@@ -36,7 +37,8 @@ export class MessagesComponent {
   ngOnInit(): void {}
 
   createChat(otherUser: any) {
-    
+    console.log("I am heeereeee")
+    this.chatsService.createChat(otherUser).subscribe();
   }
 
 }
