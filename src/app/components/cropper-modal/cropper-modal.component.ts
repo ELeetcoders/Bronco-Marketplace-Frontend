@@ -49,6 +49,7 @@ export class CropperModalComponent {
       updateDoc(userRef, { profilePic: this.croppedImage })
         .then(() => {
           console.log('Document updated successfully!');
+          this.userService.profilePic = this.croppedImage
           this.modalRef.close();
         })
         .catch((error) => console.error('Error updating document:', error));
