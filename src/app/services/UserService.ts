@@ -12,6 +12,7 @@ export class UserService {
   public email: string = '';
   public signedIn: boolean = false;
   public profilePic: string = '';
+  public defaultProfilePic: string = '../../../assets/images/empty_pfp.png'
 
 
   private firestore: Firestore

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { UserService } from './services/UserService';
 import { HttpClient } from '@angular/common/http';
 import { Observer } from 'rxjs';
+import { User } from './models/User';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { Observer } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  user: User;
 
   constructor(
     public userService: UserService,
@@ -40,8 +43,10 @@ export class AppComponent {
     const observer: Observer<any> = {
       next: response => {
         if (response.status != 401 ) {
-          this.userService.email = response
+          this.user = response
           this.userService.signedIn = true
+          this.userService.email = this.user.email
+          this.userService.profilePic = this.user.profilePic ?? this.userService.defaultProfilePic
         }
       },
       error: error => console.error(error),

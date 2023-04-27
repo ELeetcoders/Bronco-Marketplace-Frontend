@@ -23,11 +23,11 @@ export class ChatsService {
         users: [
           {
             username: user.username ?? '',
-            profilepic: user.profilepic ?? ''
+            profilepic: user.profilePic ?? this.userService.defaultProfilePic
           },
           {
             username: otherUser.username ?? '',
-            profilepic : user.profilepic ?? ''
+            profilepic : user.profilePic ?? this.userService.defaultProfilePic
           }
         ]
       })),

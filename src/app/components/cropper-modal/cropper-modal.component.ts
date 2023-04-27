@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UserService } from 'src/app/services/UserService';
+import { Firestore, collectionData, collection, query, where, doc, docData, updateDoc } from '@angular/fire/firestore';
 import Compressor from 'compressorjs';
 
 
@@ -11,14 +12,21 @@ import Compressor from 'compressorjs';
   styleUrls: ['./cropper-modal.component.css']
 })
 export class CropperModalComponent {
-  constructor(public modalRef: MdbModalRef<CropperModalComponent>, public userService: UserService) {}
+  constructor(
+    public modalRef: MdbModalRef<CropperModalComponent>,
+    public userService: UserService,
+    firestore: Firestore
+    ) {
+      this.firestore = firestore
+    }
 
+  private firestore: Firestore
   imageChangedEvent: any = '';
   empty_pfp: String = '../../../assets/images/empty_pfp.png'
   croppedImage: any = this.userService.profilePic == '' ? this.empty_pfp : this.userService.profilePic
 
     fileChangeEvent(event: any): void {
-        console.log("here")
+        console.log(this.croppedImage)
         this.imageChangedEvent = event;
     }
     imageCropped(event: ImageCroppedEvent) {
@@ -26,15 +34,26 @@ export class CropperModalComponent {
         //console.log(this.croppedImage)
     }
     imageLoaded(image: LoadedImage) {
-        console.log(image)
         // show cropper
     }
     cropperReady() {
+      this.croppedImage = this.croppedImage
         // cropper ready
     }
     loadImageFailed() {
         // show message
     }
+
+    updateProfilePic() {
+      const userRef = doc(collection(this.firestore, 'user'), 'mmt@cpp.edu');
+      updateDoc(userRef, { profilePic: this.croppedImage })
+        .then(() => {
+          console.log('Document updated successfully!');
+          this.modalRef.close();
+        })
+        .catch((error) => console.error('Error updating document:', error));
+    }
+
 
     onSelectFile(event: any) {
       // called each time file input changes
