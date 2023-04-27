@@ -9,12 +9,10 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class UserService {
-  public username: String = '';
-  public firstName: String = '';
-  public lastName: String = '';
-  public email: String = '';
+  public email: string = '';
   public signedIn: boolean = false;
-  public profilePic: any = '';
+  public profilePic: string = '';
+
 
   private firestore: Firestore
 
@@ -24,14 +22,14 @@ export class UserService {
   }
 
   get currentUser$(): Observable<User> {
-    const ref = doc(this.firestore, 'user', 'ugaeta@cpp.edu')
-    return docData(ref) as Observable<User>
+    const ref = doc(this.firestore, 'user', this.email as string)
+    return docData(ref, {idField: 'email'}) as Observable<User>
   }
 
   get allUsers$(): Observable<User[]> {
     let ref = collection(this.firestore, 'user');
     let queryall= query(ref);
-    return collectionData(queryall) as Observable<User[]>
+    return collectionData(queryall, {idField: 'email'}) as Observable<User[]>
   }
 
 

@@ -11,11 +11,11 @@ import { UserService } from 'src/app/services/UserService';
 })
 export class SignUpComponent {
 
-  firstname: String = '';
-  lastname: String = '';
-  email: String = '';
-  username: String = '';
-  password: String = '';
+  firstname: string = '';
+  lastname: string = '';
+  email: string = '';
+  username: string = '';
+  password: string = '';
 
   fetching: boolean = false;
 
