@@ -51,10 +51,10 @@ export class ProductComponent {
             if (loc.url == '/create-post') {
               this.location.replaceState('/create-post')
             }
-            else if (loc.url = '/view-profile') {
+            else if (loc.url == '/view-profile') {
               this.location.replaceState('/view-profile')
             }
-            else if (loc.url = '/') {
+            else if (loc.url == '') {
               this.location.replaceState('/')
             }
           }
