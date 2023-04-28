@@ -103,6 +103,7 @@ export class CreatePostComponent {
       const extension = file.name.split('.').pop();
       const isHeic = extension.toLowerCase() === 'heic';
       const isPng = extension.toLowerCase() === 'png';
+      console.log(extension)
       console.log(isHeic);
   
       if (isHeic) {
@@ -126,29 +127,36 @@ export class CreatePostComponent {
           });
   
       } else if (isPng) {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx: any = canvas.getContext('2d');
-    
-            canvas.width = img.width;
-            canvas.height = img.height;
-    
-            ctx.drawImage(img, 0, 0);
-    
-            canvas.toBlob((blob: any) => {
-              console.log(blob);
-              this.productImage = blob;
+        if (file.size > 100000) {
+          console.log("greater")
+          console.log(file.size)
+          new Compressor(file, {
+            quality: file.size / 109000, // Set the compression quality to 15%
+            success: (compressedFile) => {
+              console.log(compressedFile);
               const reader = new FileReader();
-              reader.readAsDataURL(blob); // read file as data url
+              reader.readAsDataURL(compressedFile); // read file as data url
               reader.onload = (event) => { // called once readAsDataURL is completed
                 if (event && event.target) {
                   this.imageUrl = event.target.result as string;
                   console.log(this.imageUrl);
+                  this.cd.detectChanges()
                 }
               };
-            }, 'image/jpeg', 0.3);
+            }
+          })}
+          else {
+            this.productImage = file;
+          console.log(file);
+          const reader = new FileReader();
+          reader.readAsDataURL(file); // read file as data url
+          reader.onload = (event) => { // called once readAsDataURL is completed
+            if (event && event.target) {
+              this.imageUrl = event.target.result as string;
+              console.log(this.imageUrl);
+            }
           };
+          }
       } else {
         // Check if the file size exceeds 1MB
         console.log("greater")
