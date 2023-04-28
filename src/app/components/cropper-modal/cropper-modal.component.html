@@ -9,7 +9,7 @@
   </div>
   <div class="modal-body">
 
-    <input type="file" (change)="onSelectFile($event)" (change)="fileChangeEvent($event)" />
+    <input type="file" (change)="fileChangeEvent($event)" accept="image/*"/>
 
     <image-cropper
         [imageChangedEvent]="imageChangedEvent"

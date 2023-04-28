@@ -43,10 +43,11 @@ export class CropperModalComponent {
     imageLoaded(image: LoadedImage) {
       console.log("urmoma")
       console.log(image)
+      //this.croppedImage = image
         // show cropper
     }
     cropperReady() {
-      this.croppedImage = this.croppedImage
+      //this.croppedImage = this.croppedImage
         // cropper ready
     }
     loadImageFailed() {
