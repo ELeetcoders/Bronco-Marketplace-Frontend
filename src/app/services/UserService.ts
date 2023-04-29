@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Firestore, collectionData, collection, query, where, doc, docData } from '@angular/fire/firestore';
-import { orderBy } from '@firebase/firestore';
 import { User } from '../models/User';
 
 
@@ -23,7 +22,7 @@ export class UserService {
   }
 
   get currentUser$(): Observable<User> {
-    const ref = doc(this.firestore, 'user', this.email as string)
+    const ref = doc(this.firestore, 'user', 'ugaeta@cpp.edu')
     return docData(ref, {idField: 'email'}) as Observable<User>
   }
 
