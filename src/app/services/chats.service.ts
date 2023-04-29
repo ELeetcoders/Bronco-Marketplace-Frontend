@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, doc, documentId } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, documentId, query, where } from '@angular/fire/firestore';
 import { Observable, concatMap, map, take } from 'rxjs';
 import { UserService } from './UserService';
 import { User } from '../models/User';
+import { Chat } from '../models/Chats';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,26 @@ export class ChatsService {
     )
   }
 
+  get myChats$(): Observable<Chat[]> {
+    const ref = collection(this.firestore, 'chats');
+    return this.userService.currentUser$.pipe(
+      concatMap((user) => {
+        const myquery = query(ref, where('userEmails', 'array-contains', user?.email))
+        return collectionData(myquery, {idField: 'id'}).pipe(
+          map(chats => this.addChatNameAndPic(user.email, chats as Chat[]))
+        ) as Observable<Chat[]>
+      })
+    );
+  }
+
+  addChatNameAndPic(currentUserEmail: string, chats: Chat[]) : Chat[] {
+  chats.forEach(chat => {
+    const otherIndex = chat.userEmails.indexOf(currentUserEmail) === 0 ? 1 : 0;
+    const {username,  profilePic} = chat.users[otherIndex];
+    chat.chatName = username;
+    chat.chatPic = profilePic;
+  }) 
+  
+  return chats;
+  }
 }

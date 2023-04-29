@@ -23,3 +23,28 @@ h1 {
 .search-input {
     margin: 24px;
 }
+
+.chat-title {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.chat-name {
+    font-weight: 500;
+}
+
+.chat-date {
+    font-size: .7rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.chat-last-message {
+    font-size: .9rem;
+    color:rgba(0, 0, 0, 0.8);
+}
+
+p {
+    margin-top: 1em;
+    line-height: .1;
+    margin-bottom: 1em;
+}
