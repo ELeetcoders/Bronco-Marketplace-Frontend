@@ -41,34 +41,34 @@ export class ProductComponent {
     public ProductDetailService: ProductDetailService,
     ) {
 
-      this.location.subscribe((loc) => {
-        console.log(loc)
-        if (loc.url === '' || loc.url == '/create-post' || loc.url == '/view-profile') {
-          if (this.modalRef) {
-            this.modalRef?.close()
-          }
-          else {
-            if (loc.url == '/create-post') {
-              this.location.replaceState('/create-post')
-            }
-            else if (loc.url == '/view-profile') {
-              this.location.replaceState('/view-profile')
-            }
-            else if (loc.url == '') {
-              this.location.replaceState('/')
-            }
-          }
-          //this.location.go('/', '', this.router.parseUrl(this.router.url).queryParams);
-          //this.location.back()
-        }
-        else if (loc.url === '/product/' + this.id) {
-          // this.modalRef = this.modalService.open(ProductModalComponent, {
-          //   modalClass: 'modal-fullscreen'
-          // })
-          //this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
-          //this.location.forward()
-        }
-      });
+      // this.location.subscribe((loc) => {
+      //   console.log(loc)
+      //   if (loc.url === '' || loc.url == '/create-post' || loc.url == '/view-profile') {
+      //     if (this.modalRef) {
+      //       this.modalRef?.close()
+      //     }
+      //     else {
+      //       if (loc.url == '/create-post') {
+      //         this.location.replaceState('/create-post')
+      //       }
+      //       else if (loc.url == '/view-profile') {
+      //         this.location.replaceState('/view-profile')
+      //       }
+      //       else if (loc.url == '') {
+      //         this.location.replaceState('/')
+      //       }
+      //     }
+      //     //this.location.go('/', '', this.router.parseUrl(this.router.url).queryParams);
+      //     //this.location.back()
+      //   }
+      //   else if (loc.url === '/product/' + this.id) {
+      //     // this.modalRef = this.modalService.open(ProductModalComponent, {
+      //     //   modalClass: 'modal-fullscreen'
+      //     // })
+      //     //this.location.go('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
+      //     //this.location.forward()
+      //   }
+      // });
     }
 
   ngAfterViewInit() {
@@ -96,15 +96,21 @@ export class ProductComponent {
     this.modalRef = this.modalService.open(ProductModalComponent, {
       modalClass: 'modal-fullscreen'
     })
+
+    const modalState = {
+      modal : true,
+      desc : 'Product details'
+  };
+  history.pushState(modalState, '', '/product' + this.id);
     //this.location.replaceState('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
     //this.location.go('/product/' + this.id)
 
-    const currentPath = this.location.path();
-    if (history.state !== null && currentPath.includes('/product/')) {
-      this.location.replaceState(window.history.state, document.title, window.location.href);
-    } else {
-      this.location.go('/product/' + this.id);
-    }
+    // const currentPath = this.location.path();
+    // if (history.state !== null && currentPath.includes('/product/')) {
+    //   this.location.replaceState(window.history.state, document.title, window.location.href);
+    // } else {
+    //   this.location.go('/product/' + this.id);
+    // }
 
     this.ProductDetailService.imageUrl = this.imageUrl
     this.ProductDetailService.price = this.price

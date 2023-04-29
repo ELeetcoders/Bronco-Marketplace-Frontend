@@ -30,14 +30,26 @@ export class ProductModalComponent {
     this.title = this.ProductDetailService.title;
     this.price = this.ProductDetailService.price;
     this.email = this.ProductDetailService.email
+
+  //   const modalState = {
+  //     modal : true,
+  //     desc : 'Product details'
+  // };
+  // history.pushState(modalState, '', '/idk');
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  closeModalOnBack() {
+    this.modalRef.close()
   }
 
   closeModal() {
+    this.modalRef.close()
     // make it so that it changes to the base URL using location object
-    console.log(this.title)
-    console.log('eeee')
+    // console.log(this.title)
+    // console.log('eeee')
     //this.modalRef.close();
-    this.location.back();
+    //this.location.back();
     //this.location.replaceState('/')
     //this.modalRef.close();
     //this.router.navigate(['/'])
@@ -46,6 +58,12 @@ export class ProductModalComponent {
   @HostListener('document:keydown.escape', ['$event'])
   onEscapeKeydown(event: KeyboardEvent) {
     this.closeModal();
+  }
+
+  ngOnDestroy() {
+    if (window.history.state.modal) {
+      history.back();
+    }
   }
   
 }
