@@ -12,6 +12,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
 import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 import { AppComponent } from './app.component';
@@ -84,7 +86,9 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     ImageCropperModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    MatListModule,
+    MatDividerModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

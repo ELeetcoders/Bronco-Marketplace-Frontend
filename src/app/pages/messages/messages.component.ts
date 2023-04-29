@@ -21,18 +21,18 @@ export class MessagesComponent {
     this.user$, 
     this.searchControl.valueChanges.pipe(startWith(''))]).pipe(
       map(([users, user, searchString]) => {
-        return users.filter((otherUser) =>
+        return users.filter(
+          (otherUser) =>
           otherUser.username?.toLowerCase().includes(searchString!.toLowerCase()) &&
           otherUser.username?.toLowerCase() !== user.username?.toLowerCase()
           )
       })
     );
     
-  constructor(public UserService: UserService, private chatsService : ChatsService) {
+    myChats$ = this.chatsService.myChats$;
 
-     this.user$.subscribe((value) => {
-       console.log(value);
-     });
+  constructor(private UserService: UserService, private chatsService : ChatsService) {
+  
   }
 
   ngOnInit(): void {}
