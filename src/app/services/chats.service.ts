@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, Timestamp, addDoc, collection, collectionData, doc, documentId, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, Timestamp, addDoc, collection, collectionData, doc, docData, documentId, getDoc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable, concatMap, map, take } from 'rxjs';
 import { UserService } from './UserService';
 import { User } from '../models/User';
@@ -73,9 +73,16 @@ export class ChatsService {
   addChatNameAndPic(currentUserEmail: string, chats: Chat[]) : Chat[] {
   chats.forEach(chat => {
     const otherIndex = chat.userEmails.indexOf(currentUserEmail) === 0 ? 1 : 0;
-    const {username,  profilePic} = chat.users[otherIndex];
+    const {username} = chat.users[otherIndex];
     chat.chatName = username;
-    chat.chatPic = profilePic;
+    const otherUserEmail = chat.userEmails[1]
+    const userRef = doc(this.firestore, 'user', otherUserEmail);
+    docData(userRef).pipe(
+      map(user => user['profilePic'])
+    ).subscribe(profilePic => {
+      console.log(profilePic);
+      chat.chatPic = profilePic;
+    });
   }) 
   
   return chats;
