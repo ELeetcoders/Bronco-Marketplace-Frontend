@@ -40,18 +40,19 @@ import { CropperModalComponent } from './components/cropper-modal/cropper-modal.
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
 import { DatePipe } from '@angular/common';
-import { DateDisplayPipe } from './pipes/date-display.pipe';
+import { AuthGuardService } from './services/AuthGuardService';
+// import { DateDisplayPipe } from './pipes/date-display.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'create-post', component: CreatePostComponent},
+  {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuardService]},
   {path: 'search', component: HomeComponent},
   {path: 'product/:id', component: ProductPageComponent},
-  {path: 'messages', component: MessagesComponent},
+  {path: 'messages', component: MessagesComponent, },
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'edit-profile', component: EditProfileComponent},
-  {path: 'view-profile', component: ViewProfileComponent},
+  {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'view-profile', component: ViewProfileComponent, canActivate: [AuthGuardService]},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
     CropperModalComponent,
     EditProfileComponent,
     ViewProfileComponent,
-    DateDisplayPipe
+    // DateDisplayPipe
   ],
   imports: [
     BrowserModule,

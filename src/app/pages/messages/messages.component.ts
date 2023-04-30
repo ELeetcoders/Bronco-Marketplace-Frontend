@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/models/User';
+import { AuthGuardService } from 'src/app/services/AuthGuardService';
 import { UserService } from 'src/app/services/UserService';
 import { ChatsService } from 'src/app/services/chats.service';
 
@@ -54,7 +55,8 @@ export class MessagesComponent {
 
     constructor(
       private UserService: UserService,
-      private chatsService : ChatsService
+      private chatsService : ChatsService,
+      private authGuard: AuthGuardService
       ) {}
 
   ngOnInit(): void {
