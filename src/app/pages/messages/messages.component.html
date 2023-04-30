@@ -33,7 +33,7 @@
                             {{ chat.chatName }}
                     </span>
                     <span class="chat-date">
-                        {{chat.lastMessageDate}}
+                        {{chat.lastMessageDate | dateDisplay}}
                     </span>
                 </p>
                 <p mat-line class="chat-last-message">
@@ -71,10 +71,11 @@
                     >
                         {{message.text}}
                         <span class="chat-date">
-                            4/30/2023
+                            {{message.sentDate | dateDisplay}}
                         </span>
                     </div>
                 </div>
+                <div #endOfChat></div>
             </ng-container>
         </div>
         <div class="input-area">

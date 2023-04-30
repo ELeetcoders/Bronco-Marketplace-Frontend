@@ -39,6 +39,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CropperModalComponent } from './components/cropper-modal/cropper-modal.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
+import { DatePipe } from '@angular/common';
+import { DateDisplayPipe } from './pipes/date-display.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -70,6 +72,7 @@ const appRoutes: Routes = [
     CropperModalComponent,
     EditProfileComponent,
     ViewProfileComponent,
+    DateDisplayPipe
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,7 @@ const appRoutes: Routes = [
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

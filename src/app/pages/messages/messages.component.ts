@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, map, startWith, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/models/User';
@@ -11,6 +11,8 @@ import { ChatsService } from 'src/app/services/chats.service';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent {
+
+  @ViewChild('endOfChat') endOfChat: ElementRef;
 
   searchControl = new FormControl('');
   chatListControl = new FormControl();
@@ -44,7 +46,10 @@ export class MessagesComponent {
 
     messages$ = this.chatListControl.valueChanges.pipe(
       map(value => value[0]),
-      switchMap(chatId => this.chatsService.getChatMessages$(chatId))
+      switchMap(chatId => this.chatsService.getChatMessages$(chatId)),
+      tap(() => {
+        this.scrollToBottom()
+      })
     )
 
     constructor(
@@ -64,9 +69,19 @@ export class MessagesComponent {
     const selectedChatId = this.chatListControl.value[0];
 
     if (message && selectedChatId) {
-      this.chatsService.addChatMessage(selectedChatId, message).subscribe()
+      this.chatsService.addChatMessage(selectedChatId, message).subscribe(() => {
+        this.scrollToBottom();
+      });
+
       this.messageControl.setValue('');
     }
   }
 
+  scrollToBottom() {
+    setTimeout(() =>{
+      if (this.endOfChat) {
+        this.endOfChat.nativeElement.scrollIntoView({behavior: "smooth"})
+      }
+    }, 100)
+  }
 }
