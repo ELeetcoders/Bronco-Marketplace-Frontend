@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, map, startWith, switchMap, tap } from 'rxjs';
+import { combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/UserService';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -61,7 +61,17 @@ export class MessagesComponent {
   }
 
   createChat(otherUser: User) {
-    this.chatsService.createChat(otherUser).subscribe();
+    this.chatsService.isExistingChat(otherUser?.email).pipe(
+      switchMap(chatId => {
+        if (chatId) {
+          return of(chatId);
+        } else {
+          return this.chatsService.createChat(otherUser);
+        }
+      })
+    ).subscribe(chatId => {
+      this.chatListControl.setValue([chatId]);
+    })
   }
 
   sendMessage() {
