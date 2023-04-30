@@ -19,9 +19,9 @@
             </mat-autocomplete>
         </div>
 
-        <mat-selection-list [multiple]="false" [formcontrol]="chatListControl">
+        <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true">
             <mat-divider></mat-divider>
-            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id">
+            <mat-list-option *ngFor="let chat of myChats$ | async" (click)="selectChat(chat)" [value]="chat.id">
                 <img matListItemAvatar [src]="
                 chat.chatPic
                 ? chat.chatPic

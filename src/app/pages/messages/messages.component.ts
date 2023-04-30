@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, map, startWith, tap } from 'rxjs';
+import { Chat } from 'src/app/models/Chats';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/UserService';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -35,28 +36,20 @@ export class MessagesComponent {
     );
 
     selectedChat$ = combineLatest([
-      this.chatListControl.valueChanges.pipe(startWith('')),
+      this.chatListControl.valueChanges.pipe(startWith('empty')),
       this.myChats$.pipe(startWith([]))
     ]).pipe(
       tap(([value, chats]) => console.log('combineLatest emitted', value, chats)),
       map(([value, chats]) => {
         console.log('map emitted', value, chats);
-        return chats.find((c) => c.id === value[0]);
+        return chats.find(c => c.id === value[0]);
       })
     );
 
     constructor(
       private UserService: UserService,
       private chatsService : ChatsService
-      ) {
-        this.chatListControl = new FormControl();
-        this.myChats$ = this.chatsService.myChats$;
-        this.myChats$.subscribe(chats => {
-          if (chats.length > 0) {
-            this.chatListControl.setValue(chats[0].id)
-          }
-        })
-      }
+      ) {}
 
   ngOnInit(): void {
     console.log('MessagesComponent initialized');
@@ -66,4 +59,16 @@ export class MessagesComponent {
     console.log(otherUser)
     this.chatsService.createChat(otherUser).subscribe();
   }
+
+  selectChat(chat: Chat) {
+    this.selectedChat$ = combineLatest([
+      this.myChats$,
+      chat.id
+    ]).pipe(
+      map(([chats, c]) => {
+        return chats.find(c => c.id === chat.id)
+      })
+    )
+  }
+
 }
