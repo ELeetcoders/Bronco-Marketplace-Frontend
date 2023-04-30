@@ -23,7 +23,7 @@ export class UserService {
   }
 
   get currentUser$(): Observable<User> {
-    const ref = doc(this.firestore, 'user', 'ugaeta@cpp.edu')
+    const ref = doc(this.firestore, 'user', this.email)
     return docData(ref, {idField: 'email'}) as Observable<User>
   }
 

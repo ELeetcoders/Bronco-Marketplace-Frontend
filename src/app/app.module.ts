@@ -48,7 +48,7 @@ const appRoutes: Routes = [
   {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuardService]},
   {path: 'search', component: HomeComponent},
   {path: 'product/:id', component: ProductPageComponent},
-  {path: 'messages', component: MessagesComponent, },
+  {path: 'messages', component: MessagesComponent, canActivate: [AuthGuardService]},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
