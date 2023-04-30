@@ -19,7 +19,7 @@ h1 {
     margin: 16px;
     border-radius: 16px;
     padding: 24px;
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0);
 }
 
 .search-input {
@@ -56,7 +56,7 @@ p {
     display: flex;
     margin-bottom: 10px;
     text-align: center;
-    background-color: rbga(27,71,1,0);
+    background-color: rgba(94, 255, 0, 0);
 }
 
 .messages-header > img {
@@ -65,7 +65,7 @@ p {
     margin-right: 16px;
     height: 35px;
     border: rgba(0,0,0,0);
-    background: rgba(0,0,0,0);
+    background: rgba(255, 0, 0, 0);
 }
 
 .messages-header > h2 {
@@ -74,8 +74,14 @@ p {
 }
 
 .chat-area {
-    height: calc(100vh - 310px);
-    background: white;
+    height: calc(100vh - 325px);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-area > :first-child {
+    margin-top: auto;
 }
 
 .input-area > mat-form-field {
@@ -85,4 +91,43 @@ p {
 .input-area {
     padding-top: 16px;
     padding-bottom: 8px;
+}
+
+.messages{
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.chat-bubble-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.chat-bubble-container.sender {
+    justify-content: flex-end;
+}
+
+.chat-bubble-container.sender > .chat-bubble {
+    background: rgba(210,237,255,255);
+}
+
+.chat-bubble {
+    background: rgba(197, 236, 146, .769);
+    padding-top: 8px;
+    padding-bottom: 18px;
+    padding-left: 8px;
+    padding-right: 100px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    width: fit-content;
+
+    position: relative;
+}
+
+.chat-bubble > .chat-date {
+    position: absolute;
+    bottom: 2px;
+    right: 8px;
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.6);
 }

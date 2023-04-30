@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Firestore, collectionData, collection, query, where, doc, docData } from '@angular/fire/firestore';
 import { User } from '../models/User';
+import { tap } from 'rxjs';
 
 
 @Injectable({

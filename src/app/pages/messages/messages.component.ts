@@ -56,7 +56,6 @@ export class MessagesComponent {
   }
 
   createChat(otherUser: User) {
-    console.log(otherUser)
     this.chatsService.createChat(otherUser).subscribe();
   }
 
