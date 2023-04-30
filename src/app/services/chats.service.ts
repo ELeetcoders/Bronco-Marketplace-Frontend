@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, documentId, query, where } from '@angular/fire/firestore';
+import { Firestore, Timestamp, addDoc, collection, collectionData, doc, documentId, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable, concatMap, map, take } from 'rxjs';
 import { UserService } from './UserService';
 import { User } from '../models/User';
-import { Chat } from '../models/Chats';
+import { Chat, Message } from '../models/Chats';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,29 @@ export class ChatsService {
         ) as Observable<Chat[]>
       })
     );
+  }
+
+  addChatMessage(chatId: string, message: string): Observable<any> {
+    const ref = collection(this.firestore, 'chats', chatId, 'messages');
+    const chatRef = doc(this.firestore, 'chats', chatId);
+    const today = Timestamp.fromDate(new Date());
+    return this.userService.currentUser$.pipe(
+      take(1),
+      concatMap((user) => addDoc(ref, {
+        text: message,
+        senderId: user?.email,
+        sentDate: today
+      })),
+      concatMap(() => 
+      updateDoc(chatRef, {lastMessage: message, lastMessageDate: today}))
+    )
+  }
+
+  getChatMessages$(chatId: string) : Observable<Message[]>{
+    const ref = collection(this.firestore, 'chats', chatId, 'messages')
+    const queryAll = query(ref, orderBy('sentDate', 'asc'))
+    console.log(collectionData(queryAll) as Observable<Message[]>)
+    return collectionData(queryAll) as Observable<Message[]>
   }
 
   addChatNameAndPic(currentUserEmail: string, chats: Chat[]) : Chat[] {

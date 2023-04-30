@@ -18,6 +18,8 @@ h1 {
     width: 60%;
     margin: 16px;
     border-radius: 16px;
+    padding: 24px;
+    background: rgba(0,0,0,0.05);
 }
 
 .search-input {
@@ -48,4 +50,39 @@ p {
     margin-top: 1em;
     line-height: .1;
     margin-bottom: 1em;
+}
+
+.messages-header {
+    display: flex;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: rbga(27,71,1,0);
+}
+
+.messages-header > img {
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+    height: 35px;
+    border: rgba(0,0,0,0);
+    background: rgba(0,0,0,0);
+}
+
+.messages-header > h2 {
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.chat-area {
+    height: calc(100vh - 310px);
+    background: white;
+}
+
+.input-area > mat-form-field {
+    width: 100%;
+}
+
+.input-area {
+    padding-top: 16px;
+    padding-bottom: 8px;
 }

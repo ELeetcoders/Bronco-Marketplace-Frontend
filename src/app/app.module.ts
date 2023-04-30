@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import {MatInputModule} from '@angular/material/input';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatListModule } from '@angular/material/list';
@@ -83,6 +85,8 @@ const appRoutes: Routes = [
     MdbDropdownModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatButtonModule,
+    MatIconModule,
     MatSnackBarModule,
     ImageCropperModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
