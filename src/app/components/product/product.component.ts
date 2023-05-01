@@ -6,6 +6,7 @@ import { ProductModalComponent } from '../product-modal/product-modal.component'
 import { Location } from '@angular/common';
 import { Router, UrlSegment } from '@angular/router';
 import { ProductDetailService } from 'src/app/services/ProductDetailService';
+import { User } from 'src/app/models/User';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ProductComponent {
   email: string = '';
 
   id: string = ''; 
+  userSeller: User;
   //imageUrl: string = '';
 
   // imageUrl: SafeUrl;
@@ -79,6 +81,13 @@ export class ProductComponent {
       this.price = "$" + this.product.price.toString()
       this.id = this.product.id;
       this.email = this.product.email
+      this.userSeller = {
+        email: this.product.email,
+        username: this.product.username,
+        firstname: this.product.firstname,
+        lastname: this.product.lastname,
+        profilePic : ''
+      }
       // if (!this.imageUrl.includes("data:image/jpeg;base64,")) {
       //   console.log(this.imageUrl)
       //   this.imageUrl = "data:image/jpeg;base64," + this.imageUrl
@@ -117,6 +126,7 @@ export class ProductComponent {
     this.ProductDetailService.description = this.description
     this.ProductDetailService.title = this.title
     this.ProductDetailService.email = this.email
+    this.ProductDetailService.userSeller = this.userSeller
     //this.router.navigate(['/product/' + this.id])
   }
 

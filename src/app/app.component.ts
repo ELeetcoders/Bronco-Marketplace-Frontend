@@ -48,8 +48,14 @@ export class AppComponent {
           this.userService.email = this.user.email
           this.userService.profilePic = this.user.profilePic ?? this.userService.defaultProfilePic
         }
+        else {
+          this.userService.profilePic = this.userService.defaultProfilePic
+        }
       },
-      error: error => console.error(error),
+      error: error => {
+        console.error(error)
+        this.userService.profilePic = this.userService.defaultProfilePic
+      },
       complete: () => console.log('complete')
     };
     this.http.get('http://api.broncomarketplace.com:8080/login/verify', options).subscribe(observer);
