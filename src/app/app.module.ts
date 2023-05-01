@@ -42,6 +42,8 @@ import { ViewProfileComponent } from './pages/view-profile/view-profile.componen
 import { DatePipe } from '@angular/common';
 import { AuthGuardService } from './services/AuthGuardService';
 import { DateDisplayPipe } from './pipes/DateDisplayPipe';
+import { TimeDisplayPipe } from './pipes/TimeDisplayPipe';
+import { DateTimeDisplayPipe } from './pipes/DateTimeDisplayPipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -73,7 +75,9 @@ const appRoutes: Routes = [
     CropperModalComponent,
     EditProfileComponent,
     ViewProfileComponent,
-    DateDisplayPipe
+    DateDisplayPipe,
+    TimeDisplayPipe,
+    DateTimeDisplayPipe
   ],
   imports: [
     BrowserModule,
