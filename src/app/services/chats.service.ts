@@ -91,12 +91,12 @@ export class ChatsService {
     const otherIndex = chat.userEmails.indexOf(currentUserEmail) === 0 ? 1 : 0;
     const {username} = chat.users[otherIndex];
     chat.chatName = username;
-    const otherUserEmail = chat.userEmails[1]
+    const otherUserEmail = chat.userEmails[otherIndex]
     const userRef = doc(this.firestore, 'user', otherUserEmail);
     docData(userRef).pipe(
       map(user => user['profilePic'])
     ).subscribe(profilePic => {
-      console.log(profilePic);
+      //console.log(profilePic);
       chat.chatPic = profilePic;
     });
   }) 
