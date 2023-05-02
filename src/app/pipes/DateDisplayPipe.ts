@@ -9,7 +9,7 @@ export class DateDisplayPipe implements PipeTransform {
 
     constructor(private datePipe: DatePipe) {}
 
-    transform(value: any, ...args: any[]): string {
+    transform(value: any): string {
 
         // Get the current date and time
         const currentDate = new Date();

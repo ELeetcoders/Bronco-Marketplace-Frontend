@@ -63,20 +63,33 @@
         <mat-divider></mat-divider>
         <div class="chat-area">
             <ng-container *ngIf="user$ | async as currentUser">
-                <div *ngFor="let message of messages$ | async" 
+                <div *ngFor="let message of messages$ | async"
                 class="chat-bubble-container"
-                [ngClass]="{ 'sender': message.senderId === currentUser.email}"
                 >
-                    <div class="chat-bubble"
-                    >
-                        {{message.text}}
-                        <span class="chat-date">
-                            {{message.sentDate | timeDisplay}}
+
+                    <div class = "date-bubble">
+                        <span class="date">
+                            {{message.sentDate | dateTimeDisplay}}
                         </span>
                     </div>
+
+                    <div [ngClass]="{ 'sender': message.senderId === currentUser.email}">
+                        <div class="chat-bubble">
+                            {{message.text}}
+                            <span class="chat-date">
+                                {{message.sentDate | timeDisplay}}
+                            </span>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div #endOfChat></div>
             </ng-container>
+            <ng-template #nouser>
+                <div>
+                    no User
+                </div>
+            </ng-template>
         </div>
         <div class="input-area">
             <mat-form-field appearance="outline">

@@ -44,6 +44,7 @@ import { AuthGuardService } from './services/AuthGuardService';
 import { DateDisplayPipe } from './pipes/DateDisplayPipe';
 import { TimeDisplayPipe } from './pipes/TimeDisplayPipe';
 import { DateTimeDisplayPipe } from './pipes/DateTimeDisplayPipe';
+import { DayDisplayPipe } from './pipes/display-date.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
     ViewProfileComponent,
     DateDisplayPipe,
     TimeDisplayPipe,
-    DateTimeDisplayPipe
+    DateTimeDisplayPipe,
+    DayDisplayPipe
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,7 @@ const appRoutes: Routes = [
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, DayDisplayPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
