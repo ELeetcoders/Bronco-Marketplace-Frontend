@@ -21,7 +21,7 @@
 
         <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true" [formControl]="chatListControl">
             <mat-divider></mat-divider>
-            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id">
+            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id" id={{chat.id}}>
                 <img matListItemAvatar [src]="
                 chat.chatPic
                 ? chat.chatPic

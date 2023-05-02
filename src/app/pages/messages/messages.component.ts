@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Injectable, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { AuthGuardService } from 'src/app/services/AuthGuardService';
+import { ProductDetailService } from 'src/app/services/ProductDetailService';
 import { UserService } from 'src/app/services/UserService';
 import { ChatsService } from 'src/app/services/chats.service';
 
@@ -11,8 +12,19 @@ import { ChatsService } from 'src/app/services/chats.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent {
 
+@Injectable({
+  providedIn: 'root'
+})
+export class MessagesComponent implements AfterViewInit{
+
+  constructor(
+    private UserService: UserService,
+    private chatsService : ChatsService,
+    private authGuard: AuthGuardService,
+    private ProductDetailService: ProductDetailService
+    ) {}
+    
   @ViewChild('endOfChat') endOfChat: ElementRef;
 
   searchControl = new FormControl('');
@@ -34,7 +46,15 @@ export class MessagesComponent {
       })
     );
     
-    myChats$ = this.chatsService.myChats$;
+    myChats$ = this.chatsService.myChats$
+
+    // use tap() to display once gotten values
+    // myChats$ = this.chatsService.myChats$.pipe(
+    //   tap(value => {
+    //     console.log('myChats$ emitted:', value);
+    //   })
+    // );
+    
 
     selectedChat$ = combineLatest([
       this.chatListControl.valueChanges,
@@ -53,13 +73,22 @@ export class MessagesComponent {
       })
     )
 
-    constructor(
-      private UserService: UserService,
-      private chatsService : ChatsService,
-      private authGuard: AuthGuardService
-      ) {}
-
   ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit() {
+    console.log("fuckkkkkkkkkkkkkkk")
+    combineLatest([this.myChats$, of(null)]).subscribe(([myChats, _]) => {
+      console.log('myChats$ is done');
+      const element = document.getElementById(this.ProductDetailService.chatId);
+      console.log(element)
+      if (element && this.ProductDetailService.chatId != '') {
+        element.click()
+        this.ProductDetailService.chatId = ''
+      }
+    });
+    //this.myInput.nativeElement.focus();
   }
 
   createChat(otherUser: User) {
@@ -73,6 +102,7 @@ export class MessagesComponent {
       })
     ).subscribe(chatId => {
       this.chatListControl.setValue([chatId]);
+      this.ProductDetailService.chatId = chatId
     })
   }
 

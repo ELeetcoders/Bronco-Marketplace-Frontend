@@ -32,6 +32,7 @@ export class AuthGuardService {
           this.userService.profilePic = this.user.profilePic ?? this.userService.defaultProfilePic;
           return true;
         } else {
+          this.userService.profilePic = this.userService.defaultProfilePic 
           throw new Error('Unauthorized');
         }
       }),

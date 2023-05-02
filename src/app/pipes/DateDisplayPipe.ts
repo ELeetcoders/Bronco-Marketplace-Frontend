@@ -28,11 +28,11 @@ export class DateDisplayPipe implements PipeTransform {
         }
     
         // If the message was sent yesterday, display "Yesterday"
-        if (timeDiff > 86400000) {
-          const yesterday = new Date(currentTime - 86400000);
-          if (messageDate.getDate() === yesterday.getDate() && messageDate.getMonth() === yesterday.getMonth()) {
-            return 'Yesterday';
-          }
+        const messageDayOfWeek = messageDate.getDay();
+        const currentDayOfWeek = new Date().getDay();
+        // If the message was sent yesterday (i.e., the day of the week is one less than the current day of the week)
+        if (timeDiff > 86400000 && messageDayOfWeek === (currentDayOfWeek + 6) % 7) {
+          return 'Yesterday';
         }
     
         // If the message was sent between 2-6 days ago, display the day of the week
