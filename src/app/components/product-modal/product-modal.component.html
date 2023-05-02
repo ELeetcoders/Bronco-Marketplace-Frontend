@@ -27,7 +27,8 @@
       <div>
         <h2>Seller: {{email}}</h2>
       </div>
-      <button type="button" class="btn btn-primary btn-lg" (click)="navigateToMessagesAndCreateChat(userSeller)">Message</button>
+      <button *ngIf="email != userService.email" type="button" class="btn btn-primary btn-lg" (click)="navigateToMessagesAndCreateChat(userSeller)">Message</button>
+      <button *ngIf="email == userService.email" type="button" class="btn btn-primary btn-lg">Edit post</button>
     </div>
   </div>
 

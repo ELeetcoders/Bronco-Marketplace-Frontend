@@ -6,6 +6,8 @@ import { ProductDetailService } from 'src/app/services/ProductDetailService';
 import { User } from 'src/app/models/User';
 import { MessagesComponent } from 'src/app/pages/messages/messages.component';
 import { ChatsService } from 'src/app/services/chats.service';
+import { of, switchMap } from 'rxjs';
+import { UserService } from 'src/app/services/UserService';
 
 @Component({
   selector: 'app-modal',
@@ -28,7 +30,8 @@ export class ProductModalComponent {
     public router: Router,
     public ProductDetailService: ProductDetailService,
     public ChatService: ChatsService,
-    public messageComponent: MessagesComponent
+    //public messageComponent: MessagesComponent,  /* by initializing this component, the observables are called and intializes myChats$ and others*/ 
+    public userService: UserService
     ) {}
 
   ngOnInit() {
@@ -64,10 +67,27 @@ export class ProductModalComponent {
 
   navigateToMessagesAndCreateChat(otherUser: User) {
     this.closeModal()
+    if (this.userService.signedIn === false) {
+      this.router.navigate(['/sign-in'])
+    }
     this.router.navigate(['/messages']).then(async () => {
-      await this.messageComponent.createChat(otherUser)
+      await this.createChatWithUserSeller(otherUser)
       //this.messageComponent.endOfChat.nativeElement.scrollIntoView({ behavior: "smooth", block: "end" });
     });
+  }
+
+  createChatWithUserSeller(otherUser: User) {
+    this.ChatService.isExistingChat(otherUser?.email).pipe(
+      switchMap(chatId => {
+        if (chatId) {
+          return of(chatId);
+        } else {
+          return this.ChatService.createChat(otherUser);
+        }
+      })
+    ).subscribe(chatId => {
+      this.ProductDetailService.chatId = chatId
+    })
   }
 
   @HostListener('document:keydown.escape', ['$event'])
