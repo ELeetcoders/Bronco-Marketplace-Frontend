@@ -1,0 +1,17 @@
+#spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    /* padding-top: 2rem; */
+    text-align: center;
+    flex-wrap: wrap;
+    padding-bottom: 5rem;
+}
+
+.verification {
+    justify-content: center;
+    text-align: center;
+}

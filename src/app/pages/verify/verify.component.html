@@ -1,0 +1,18 @@
+<h1 routerLink="/" class="clickable">Bronco Marketplace</h1>
+
+<div *ngIf="LoadingService.loading" id="spinner" style="height: 55vh;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="!LoadingService.loading">
+    <div *ngIf="verified == true" class="verification">
+        <h1>Email verified!</h1>
+        <button type="button" class="btn btn-primary"  (click)="redirectHome()">Sign in</button>
+    </div>
+    <div *ngIf="verified == false" class="verification">
+        <h1>Invalid verification id or expired!</h1>
+        <button type="button" class="btn btn-primary"  (click)="redirectHome()">Go to home</button>
+    </div>
+</div>
