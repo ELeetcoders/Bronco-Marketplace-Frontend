@@ -74,12 +74,10 @@
 
 
                     <div *ngFor="let message of entry.value" 
-                    [ngClass]="{ 'sender': message.senderId.trim().toLowerCase() === currentUser.email.trim().toLowerCase()}"
+                    [ngClass]="{ 'sender': message.senderId === currentUser.email}"
                     >
                         <div class="chat-bubble">
                             {{message.text}}
-                            {{message.senderId}}
-                            {{currentUser.email}}
                             <span class="chat-date">
                                 {{message.sentDate | timeDisplay}}
                             </span>

@@ -30,7 +30,7 @@ export class DayDisplayPipe implements PipeTransform {
 
       if (dayDiff < 7){
           if (dayDiff == 0)
-              return this.datePipe.transform(messageDate.getTime(), 'shortTime') ?? ''
+              return 'Today'
           if (dayDiff == 1)
               return 'Yesterday'
           return this.datePipe.transform(messageDate.getTime(), 'EEEE') ?? ''
