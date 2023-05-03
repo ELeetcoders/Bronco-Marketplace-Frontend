@@ -44,6 +44,7 @@ import { AuthGuardService } from './services/AuthGuardService';
 import { DateDisplayPipe } from './pipes/DateDisplayPipe';
 import { TimeDisplayPipe } from './pipes/TimeDisplayPipe';
 import { DateTimeDisplayPipe } from './pipes/DateTimeDisplayPipe';
+import { VerifyComponent } from './pages/verify/verify.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
   {path: 'view-profile', component: ViewProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'verify', component: VerifyComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     ViewProfileComponent,
     DateDisplayPipe,
     TimeDisplayPipe,
-    DateTimeDisplayPipe
+    DateTimeDisplayPipe,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,

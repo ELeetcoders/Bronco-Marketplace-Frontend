@@ -31,12 +31,12 @@ export class DateDisplayPipe implements PipeTransform {
         const messageDayOfWeek = messageDate.getDay();
         const currentDayOfWeek = new Date().getDay();
         // If the message was sent yesterday (i.e., the day of the week is one less than the current day of the week)
-        if (timeDiff > 86400000 && messageDayOfWeek === (currentDayOfWeek + 6) % 7) {
+        if (timeDiff < 604800000 && messageDayOfWeek === (currentDayOfWeek + 6) % 7) {
           return 'Yesterday';
         }
     
         // If the message was sent between 2-6 days ago, display the day of the week
-        if (timeDiff > 172800000) {
+        if (timeDiff < 604800000 && timeDiff > 86400000) {
           const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           const messageDayOfWeek = messageDate.getDay();
           return daysOfWeek[messageDayOfWeek];

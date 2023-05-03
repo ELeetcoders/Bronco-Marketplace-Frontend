@@ -110,7 +110,7 @@ export class ProductComponent {
       modal : true,
       desc : 'Product details'
   };
-  history.pushState(modalState, '', '/product' + this.id);
+  history.pushState(modalState, '', '/product/' + this.id);
     //this.location.replaceState('/product/' + this.id, '', this.router.parseUrl(this.router.url).queryParams);
     //this.location.go('/product/' + this.id)
 
