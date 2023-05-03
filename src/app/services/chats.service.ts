@@ -103,4 +103,35 @@ export class ChatsService {
   
   return chats;
   }
+
+  getDateArray(milliSecArray: number[]) : Date[] {
+    const dates : Date[] = []
+    milliSecArray.forEach(num => {
+      dates.push(new Date(num))
+    });
+    
+    return dates
+  }
+
+  getDateMessages(messages: Message[]) : Date[] {
+    const dates : Date[] = []
+    messages.forEach(message => {
+      dates.push(this.getDay(message))
+    })
+    return dates
+  }
+
+  getDay(message: Message) : Date {
+    const temp = message.sentDate
+    const date = new Date(temp.toMillis())
+    date.setHours(0,0,0,0)
+    return temp
+  }
+
+  compareDays(message : Message, date2 : Date) : boolean {
+    const temp = message.sentDate
+    const messageDate = new Date(temp.toMillis())
+    messageDate.setHours(0,0,0,0)
+    return messageDate.getTime() === date2.getTime()
+  }
 }

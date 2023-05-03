@@ -21,7 +21,7 @@
 
         <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true" [formControl]="chatListControl">
             <mat-divider></mat-divider>
-            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id" id={{chat.id}}>
+            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id" id={{chat.id}} class="msg-list">
                 <img matListItemAvatar [src]="
                 chat.chatPic
                 ? chat.chatPic
@@ -63,20 +63,35 @@
         <mat-divider></mat-divider>
         <div class="chat-area">
             <ng-container *ngIf="user$ | async as currentUser">
-                <div *ngFor="let message of messages$ | async" 
+                <div *ngFor="let entry of mapOfDays$ | async "
                 class="chat-bubble-container"
-                [ngClass]="{ 'sender': message.senderId === currentUser.email}"
                 >
-                    <div class="chat-bubble"
-                    >
-                        {{message.text}}
-                        <span class="chat-date">
-                            {{message.sentDate | timeDisplay}}
+                    <div class = "date-bubble">
+                        <span class="date">
+                            {{entry.key | dateTimeDisplay}}
                         </span>
                     </div>
+
+
+                    <div *ngFor="let message of entry.value" 
+                    [ngClass]="{ 'sender': message.senderId === currentUser.email}"
+                    >
+                        <div class="chat-bubble">
+                            {{message.text}}
+                            <span class="chat-date">
+                                {{message.sentDate | timeDisplay}}
+                            </span>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div #endOfChat></div>
             </ng-container>
+            <ng-template #nouser>
+                <div>
+                    no User
+                </div>
+            </ng-template>
         </div>
         <div class="input-area">
             <mat-form-field appearance="outline">

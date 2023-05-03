@@ -3,29 +3,38 @@ import {Pipe, PipeTransform} from '@angular/core'
 import { Timestamp } from '@angular/fire/firestore';
 
 @Pipe({
-    name: 'dateDisplay'
+    name: 'dateTimeDisplay'
 })
 
-export class DateDisplayPipe implements PipeTransform {
+export class DayDisplayPipe implements PipeTransform {
     
     constructor(private datePipe: DatePipe) {}
 
-    transform(value: any) : string | undefined | null {
-        
-        const todaysDate = new Date();
+    getDayDiff(today: Date, messageDate: Date) :number {
+        const msInDay = 24 * 60 * 60 * 1000;
+    
+        return Math.round(
+            Math.abs(today.getTime() - messageDate.getTime()) / msInDay
+        )
+    }
 
-        const sameday = todaysDate.getDay() === value.getDay();
-        const sameMonth = todaysDate.getMonth() === value.getMonth();
-        const sameYear = todaysDate.getFullYear === value.getFullYear();
-        const isYesterday = todaysDate.getDay() - value.getDay() === 1;
+    transform(value: any) : string {
+      
+      const messageDate = value as Date
+      const todaysDate = new Date();
+      todaysDate.setHours(0,0,0,0);
+      
+      messageDate.setHours(0,0,0,0)
 
-        if (!sameYear || !sameMonth)
-            return this.datePipe.transform(value.toMillis(), 'meduimDate' ?? '');
-        if(isYesterday)
-            return 'Yesterday'
-        if(sameday)
-            return 'Today'
+      const dayDiff = this.getDayDiff(todaysDate, messageDate)
 
-        return this.datePipe.transform(value.toMillis(), 'mediumDate') ?? '';
+      if (dayDiff < 7){
+          if (dayDiff == 0)
+              return 'Today'
+          if (dayDiff == 1)
+              return 'Yesterday'
+          return this.datePipe.transform(messageDate.getTime(), 'EEEE') ?? ''
+      }
+      return this.datePipe.transform(messageDate.getTime(), 'mediumDate') ?? '';
     }
 }

@@ -23,7 +23,7 @@ export class AuthGuardService {
       return true
     }
     const options = { withCredentials: true };
-    return this.http.get('http://api.broncomarketplace.com:8080/login/verify', options).pipe(
+    return this.http.get('http/localhost:4200', options).pipe(
       map((response: any) => {
         if (response.status !== 401) {
           this.user = response;

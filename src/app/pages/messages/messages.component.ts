@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
-import { Observable, combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, combineLatest, distinct, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Message } from 'src/app/models/Chats';
 import { User } from 'src/app/models/User';
 import { AuthGuardService } from 'src/app/services/AuthGuardService';
 import { ProductDetailService } from 'src/app/services/ProductDetailService';
@@ -73,19 +75,79 @@ export class MessagesComponent implements AfterViewInit{
       })
     )
 
-  ngOnInit(): void {
+    chatDays$ : Observable<number[]> = (this.messages$ as Observable<Message[]>).pipe (
+      map(messages => {
+        const dates = messages.map(message => {
+        const date = message.sentDate instanceof Timestamp ? message.sentDate.toDate() : message.sentDate;
+        date.setHours(0, 0, 0, 0);
+        return date.getTime();
+      });
+      return Array.from(new Set(dates)).sort()
+      })
+    );
+
+    mapOfDays$: Observable<{ key: Date, value: Message[] }[]> = combineLatest([
+      this.messages$,
+      this.chatDays$
+    ]).pipe(
+      map(([messages, chatDays]) => {
+        const maps = this.chatsService.getDateArray(chatDays)
+        return maps.reduce((map, day) => {
+          const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)))
+          return map.set(day, messagesOnDay);
+        }, new Map<Date, Message[]>());
+      }),
+      map((map) =>
+        Array.from(map.entries())
+          // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
+          .map(([key, value]) => ({ key, value }))
+      )
+    )
+
+    //test reverse order
+    // mapOfDays$: Observable<Map<Date, Message[]>> = combineLatest([
+    //   this.messages$,
+    //   this.chatDays$
+    // ]).pipe(
+    //   map(([messages, chatDays]) => {
+    //     const maps = this.chatsService.getDateArray(chatDays);
+    //     return maps.reverse().reduce((map, day) => {
+    //       const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)));
+    //       return map.set(day, messagesOnDay);
+    //     }, new Map<Date, Message[]>());
+    //   })
+    // );
+
+    // sortedMap$: Observable<{ key: Date, value: Message[] }[]> = this.mapOfDays$.pipe(
+    //   map((map) =>
+    //     Array.from(map.entries())
+    //       // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
+    //       .map(([key, value]) => ({ key, value }))
+    //   )
+    // );
     
+
+
+  ngOnInit(): void {
+    // this.mapOfDays$.subscribe((date) => {
+    //   console.log(date)
+    // });
   }
 
   ngAfterViewInit() {
     console.log("fuckkkkkkkkkkkkkkk")
     combineLatest([this.myChats$, of(null)]).subscribe(([myChats, _]) => {
-      console.log('myChats$ is done');
       const element = document.getElementById(this.ProductDetailService.chatId);
-      console.log(element)
       if (element && this.ProductDetailService.chatId != '') {
         element.click()
         this.ProductDetailService.chatId = ''
+      }
+      else { /* Clicks on most recent msg */
+        const mostRecentMsgs: HTMLCollectionOf<Element> = document.getElementsByClassName("msg-list");
+        if (mostRecentMsgs.length != 0) {
+          const mostRecent: HTMLElement = mostRecentMsgs[0] as HTMLElement
+          mostRecent.click()
+        }
       }
     });
     //this.myInput.nativeElement.focus();
@@ -126,4 +188,33 @@ export class MessagesComponent implements AfterViewInit{
       }
     }, 100)
   }
+
+  getDateArray(milliSecArray: number[]) : Date[] {
+    const dates : Date[] = []
+    milliSecArray.forEach(num => {
+      dates.push(new Date(num))
+    });
+    
+    return dates
+  }
+
+  getDate(milliSec : number) : Date {
+    return new Date(milliSec)
+  }
+
+  temp(){
+    const temp = combineLatest([
+      this.user$,
+      this.messages$
+    ]).pipe
+      (
+        tap(([user, messages]) => {
+          messages.forEach(message => {
+            console.log(message.senderId)
+            console.log(user.email)
+            console.log(user.email === message.senderId)
+          });
+        })
+      )
+    }
 }

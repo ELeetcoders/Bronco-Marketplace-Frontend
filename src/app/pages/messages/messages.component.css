@@ -103,16 +103,8 @@ p {
     display: flex;
     width: 100%;
     justify-content: flex-start;
+    flex-direction: column;
 }
-
-.chat-bubble-container.sender {
-    justify-content: flex-end;
-}
-
-.chat-bubble-container.sender > .chat-bubble {
-    background: rgba(210,237,255,255);
-}
-
 .chat-bubble {
     background: rgba(197, 236, 146, .769);
     padding-top: 8px;
@@ -126,10 +118,39 @@ p {
     position: relative;
 }
 
+.chat-bubble-container > .date-bubble{
+    background: rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+    border-radius: 8px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    margin-left: 45%;
+    margin-right: 41%;
+    width: 15%;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+}
+
 .chat-bubble > .chat-date {
     position: absolute;
     bottom: 2px;
     right: 8px;
     font-size: 0.7rem;
     color: rgba(0,0,0,0.6);
+}
+
+.chat-bubble-container > .sender {
+    position: relative;
+    padding-inline-start: 60%;
+    display: flex;
+    justify-content: right;
+}
+
+.chat-bubble-container > .sender > .chat-bubble {
+    background: rgba(210,237,255,255);
 }
