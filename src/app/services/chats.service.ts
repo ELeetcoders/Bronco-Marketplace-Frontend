@@ -132,8 +132,6 @@ export class ChatsService {
     const temp = message.sentDate
     const messageDate = new Date(temp.toMillis())
     messageDate.setHours(0,0,0,0)
-    console.log(messageDate.getTime())
-    console.log(date2.getTime())
     return messageDate.getTime() === date2.getTime()
   }
 }

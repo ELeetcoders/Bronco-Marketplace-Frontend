@@ -93,15 +93,12 @@ export class MessagesComponent implements AfterViewInit{
       map(([messages, chatDays]) => {
         const maps = this.chatsService.getDateArray(chatDays)
         return maps.reduce((map, day) => {
-          console.log(messages)
-          console.log(chatDays)
           const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)))
           return map.set(day, messagesOnDay);
         }, new Map<Date, Message[]>());
       })
-    ).pipe(
-      tap((val => console.log(val)))
-    );
+    )
+
 
   ngOnInit(): void {
     
@@ -110,9 +107,7 @@ export class MessagesComponent implements AfterViewInit{
   ngAfterViewInit() {
     console.log("fuckkkkkkkkkkkkkkk")
     combineLatest([this.myChats$, of(null)]).subscribe(([myChats, _]) => {
-      console.log('myChats$ is done');
       const element = document.getElementById(this.ProductDetailService.chatId);
-      console.log(element)
       if (element && this.ProductDetailService.chatId != '') {
         element.click()
         this.ProductDetailService.chatId = ''
@@ -169,4 +164,20 @@ export class MessagesComponent implements AfterViewInit{
   getDate(milliSec : number) : Date {
     return new Date(milliSec)
   }
+
+  temp(){
+    const temp = combineLatest([
+      this.user$,
+      this.messages$
+    ]).pipe
+      (
+        tap(([user, messages]) => {
+          messages.forEach(message => {
+            console.log(message.senderId)
+            console.log(user.email)
+            console.log(user.email === message.senderId)
+          });
+        })
+      )
+    }
 }
