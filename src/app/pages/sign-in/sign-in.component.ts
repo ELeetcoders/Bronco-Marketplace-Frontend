@@ -67,7 +67,7 @@ export class SignInComponent {
         //}
         console.log(response);
         this.fetching = false
-        if (response != "VERIFY") {
+        if (response == "VERIFY") {
           this.userService.needToVerify = true
           this.router.navigate(['/verify'])
         }

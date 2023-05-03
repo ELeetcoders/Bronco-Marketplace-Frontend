@@ -45,7 +45,7 @@ export class SignUpComponent {
           //document.cookie = cookie;
         //}
         console.log(response);
-        if (response != "VERIFY" ) {
+        if (response == "VERIFY" ) {
           this.userService.needToVerify = true
           this.router.navigate(['/verify'])
         }
