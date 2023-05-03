@@ -63,7 +63,7 @@
         <mat-divider></mat-divider>
         <div class="chat-area">
             <ng-container *ngIf="user$ | async as currentUser">
-                <div *ngFor="let entry of mapOfDays$ | async | keyvalue"
+                <div *ngFor="let entry of sortedMap$ | async "
                 class="chat-bubble-container"
                 >
                     <div class = "date-bubble">

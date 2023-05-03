@@ -99,9 +99,34 @@ export class MessagesComponent implements AfterViewInit{
       })
     )
 
+    //test reverse order
+    // mapOfDays$: Observable<Map<Date, Message[]>> = combineLatest([
+    //   this.messages$,
+    //   this.chatDays$
+    // ]).pipe(
+    //   map(([messages, chatDays]) => {
+    //     const maps = this.chatsService.getDateArray(chatDays);
+    //     return maps.reverse().reduce((map, day) => {
+    //       const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)));
+    //       return map.set(day, messagesOnDay);
+    //     }, new Map<Date, Message[]>());
+    //   })
+    // );
+
+    sortedMap$: Observable<{ key: Date, value: Message[] }[]> = this.mapOfDays$.pipe(
+      map((map) =>
+        Array.from(map.entries())
+          // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
+          .map(([key, value]) => ({ key, value }))
+      )
+    );
+    
+
 
   ngOnInit(): void {
-    
+    // this.mapOfDays$.subscribe((date) => {
+    //   console.log(date)
+    // });
   }
 
   ngAfterViewInit() {
