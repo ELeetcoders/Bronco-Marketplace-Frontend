@@ -21,7 +21,7 @@
 
         <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true" [formControl]="chatListControl">
             <mat-divider></mat-divider>
-            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id" id={{chat.id}}>
+            <mat-list-option *ngFor="let chat of myChats$ | async" [value]="chat.id" id={{chat.id}} class="msg-list">
                 <img matListItemAvatar [src]="
                 chat.chatPic
                 ? chat.chatPic
@@ -63,7 +63,7 @@
         <mat-divider></mat-divider>
         <div class="chat-area">
             <ng-container *ngIf="user$ | async as currentUser">
-                <div *ngFor="let entry of sortedMap$ | async "
+                <div *ngFor="let entry of mapOfDays$ | async "
                 class="chat-bubble-container"
                 >
                     <div class = "date-bubble">

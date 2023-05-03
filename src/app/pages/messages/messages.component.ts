@@ -86,7 +86,7 @@ export class MessagesComponent implements AfterViewInit{
       })
     );
 
-    mapOfDays$: Observable<Map<Date, Message[]>> = combineLatest([
+    mapOfDays$: Observable<{ key: Date, value: Message[] }[]> = combineLatest([
       this.messages$,
       this.chatDays$
     ]).pipe(
@@ -96,7 +96,12 @@ export class MessagesComponent implements AfterViewInit{
           const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)))
           return map.set(day, messagesOnDay);
         }, new Map<Date, Message[]>());
-      })
+      }),
+      map((map) =>
+        Array.from(map.entries())
+          // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
+          .map(([key, value]) => ({ key, value }))
+      )
     )
 
     //test reverse order
@@ -113,13 +118,13 @@ export class MessagesComponent implements AfterViewInit{
     //   })
     // );
 
-    sortedMap$: Observable<{ key: Date, value: Message[] }[]> = this.mapOfDays$.pipe(
-      map((map) =>
-        Array.from(map.entries())
-          // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
-          .map(([key, value]) => ({ key, value }))
-      )
-    );
+    // sortedMap$: Observable<{ key: Date, value: Message[] }[]> = this.mapOfDays$.pipe(
+    //   map((map) =>
+    //     Array.from(map.entries())
+    //       // .sort(([key1], [key2]) => key1.getTime() - key2.getTime())  //already sorted
+    //       .map(([key, value]) => ({ key, value }))
+    //   )
+    // );
     
 
 
@@ -136,6 +141,13 @@ export class MessagesComponent implements AfterViewInit{
       if (element && this.ProductDetailService.chatId != '') {
         element.click()
         this.ProductDetailService.chatId = ''
+      }
+      else { /* Clicks on most recent msg */
+        const mostRecentMsgs: HTMLCollectionOf<Element> = document.getElementsByClassName("msg-list");
+        if (mostRecentMsgs.length != 0) {
+          const mostRecent: HTMLElement = mostRecentMsgs[0] as HTMLElement
+          mostRecent.click()
+        }
       }
     });
     //this.myInput.nativeElement.focus();
