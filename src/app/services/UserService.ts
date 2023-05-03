@@ -11,6 +11,7 @@ import { tap } from 'rxjs';
 export class UserService {
   public email: string = '';
   public signedIn: boolean = false;
+  public needToVerify: boolean | null = null; 
   public profilePic: string = '';
   public defaultProfilePic: string = '../../../assets/images/empty_pfp.png'
 

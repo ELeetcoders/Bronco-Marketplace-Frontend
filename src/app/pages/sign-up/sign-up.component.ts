@@ -45,7 +45,11 @@ export class SignUpComponent {
           //document.cookie = cookie;
         //}
         console.log(response);
-        if (response != "FAIL" ) {
+        if (response == "VERIFY" ) {
+          this.userService.needToVerify = true
+          this.router.navigate(['/verify'])
+        }
+        else if (response != "FAIL" ) {
           let user: User = response
           this.userService.email = this.email
           this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
