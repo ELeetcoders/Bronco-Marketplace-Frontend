@@ -102,6 +102,8 @@ export class CreatePostComponent {
       const file = event.target.files[0];
       const extension = file.name.split('.').pop();
       const isHeic = extension.toLowerCase() === 'heic';
+      const isPng = extension.toLowerCase() === 'png';
+      console.log(extension)
       console.log(isHeic);
   
       if (isHeic) {
@@ -124,6 +126,37 @@ export class CreatePostComponent {
             };
           });
   
+      } else if (isPng) {
+        if (file.size > 100000) {
+          console.log("greater")
+          console.log(file.size)
+          new Compressor(file, {
+            quality: file.size / 109000, // Set the compression quality to 15%
+            success: (compressedFile) => {
+              console.log(compressedFile);
+              const reader = new FileReader();
+              reader.readAsDataURL(compressedFile); // read file as data url
+              reader.onload = (event) => { // called once readAsDataURL is completed
+                if (event && event.target) {
+                  this.imageUrl = event.target.result as string;
+                  console.log(this.imageUrl);
+                  this.cd.detectChanges()
+                }
+              };
+            }
+          })}
+          else {
+            this.productImage = file;
+          console.log(file);
+          const reader = new FileReader();
+          reader.readAsDataURL(file); // read file as data url
+          reader.onload = (event) => { // called once readAsDataURL is completed
+            if (event && event.target) {
+              this.imageUrl = event.target.result as string;
+              console.log(this.imageUrl);
+            }
+          };
+          }
       } else {
         // Check if the file size exceeds 1MB
         console.log("greater")

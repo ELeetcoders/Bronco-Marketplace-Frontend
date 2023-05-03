@@ -6,4 +6,7 @@ export interface Product {
     category: string;
     price: number;
     imageUrl: string;
+    firstname: string;
+    lastname: string;
+    username: string;
 }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observer } from 'rxjs';
+import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -12,9 +13,10 @@ import { UserService } from 'src/app/services/UserService';
 })
 export class SignInComponent {
 
-  email: String = '';
-  password: String = '';
+  email: string = '';
+  password: string = '';
   fetching: boolean = false;
+  user: User
 
   constructor(
     private http: HttpClient,
@@ -45,7 +47,7 @@ export class SignInComponent {
       complete: () => console.log('complete')
     };
     const options = { withCredentials: true };
-    this.http.get('http://api.broncomarketplace.com:8080/michael', options).subscribe(observer);
+    this.http.get('http://localhost:8080/michael', options).subscribe(observer);
   }
 
   onSignInClick() {
@@ -65,9 +67,15 @@ export class SignInComponent {
         //}
         console.log(response);
         this.fetching = false
-        if (response != "FAIL" ) {
+        if (response == "VERIFY") {
+          this.userService.needToVerify = true
+          this.router.navigate(['/verify'])
+        }
+        else if (response != "FAIL" ) {
+          let user: User = response
           this.userService.email = this.email
           this.userService.signedIn = true
+          this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
           this.router.navigate(['/'])
           this.openSnackBar("Successful sign in", "Close")
         }

@@ -10,8 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import {MatInputModule} from '@angular/material/input';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 import { AppComponent } from './app.component';
@@ -34,16 +38,26 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CropperModalComponent } from './components/cropper-modal/cropper-modal.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { ViewProfileComponent } from './pages/view-profile/view-profile.component';
+import { DatePipe } from '@angular/common';
+import { AuthGuardService } from './services/AuthGuardService';
+import { DateDisplayPipe } from './pipes/DateDisplayPipe';
+import { TimeDisplayPipe } from './pipes/TimeDisplayPipe';
+import { DateTimeDisplayPipe } from './pipes/DateTimeDisplayPipe';
+import { DayDisplayPipe } from './pipes/display-date.pipe';
+import { VerifyComponent } from './pages/verify/verify.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'create-post', component: CreatePostComponent},
+  {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuardService]},
   {path: 'search', component: HomeComponent},
   {path: 'product/:id', component: ProductPageComponent},
-  {path: 'messages', component: MessagesComponent},
+  {path: 'messages', component: MessagesComponent, canActivate: [AuthGuardService]},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'edit-profile', component: EditProfileComponent},
+  {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'view-profile', component: ViewProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'verify', component: VerifyComponent},
   { path: '**', component: NotFoundComponent } // wildcard route
 ]
 
@@ -63,6 +77,12 @@ const appRoutes: Routes = [
     SignUpComponent,
     CropperModalComponent,
     EditProfileComponent,
+    ViewProfileComponent,
+    DateDisplayPipe,
+    TimeDisplayPipe,
+    DateTimeDisplayPipe,
+    DayDisplayPipe,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -78,15 +98,19 @@ const appRoutes: Routes = [
     MdbDropdownModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatButtonModule,
+    MatIconModule,
     MatSnackBarModule,
     ImageCropperModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    MatListModule,
+    MatDividerModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [DatePipe, DayDisplayPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import Compressor from 'compressorjs';
 import { CropperModalComponent } from 'src/app/components/cropper-modal/cropper-modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 

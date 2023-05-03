@@ -9,7 +9,7 @@
   </div>
   <div class="modal-body">
 
-    <input type="file" (change)="onSelectFile($event)" (change)="fileChangeEvent($event)" />
+    <input type="file" (change)="fileChangeEvent($event)" accept="image/*"/>
 
     <image-cropper
         [imageChangedEvent]="imageChangedEvent"
@@ -29,5 +29,5 @@
     <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
       Close
     </button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="updateProfilePic()">Save changes</button>
   </div>

@@ -1,10 +1,11 @@
 <!-- <h1>{{ title }}</h1> -->
 <div mdbDropdown [animation]="false" class="dropdown" *ngIf="userService.signedIn; else signedOut">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownExampleAnimation" mdbDropdownToggle aria-expanded="false">
+      <img [src]="userService.profilePic" class="pfp"/>
       {{userService.email}}
     </button>
     <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownExampleAnimation">
-      <li><a class="dropdown-item" >View profile</a></li>
+      <li><a class="dropdown-item" routerLink="/view-profile">View profile</a></li>
       <li><a class="dropdown-item" routerLink="/edit-profile" >Edit Profile</a></li>
       <li><a class="dropdown-item" routerLink="/messages" >Messages</a></li>
       <li><a class="dropdown-item" (click)="handleSignout()" >Logout</a></li>
