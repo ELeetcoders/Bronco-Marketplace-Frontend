@@ -81,6 +81,9 @@ export class VerifyComponent {
     const data = {}
     const observer: Observer<any> = {
       next: response => {
+        if (response.status != 200) {
+          this.router.navigate(['/sign-in'])
+        }
         let user: User = response
         this.userService.email = user.email
         this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
