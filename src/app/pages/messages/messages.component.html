@@ -62,18 +62,30 @@
         </ng-template>
         <mat-divider></mat-divider>
         <div class="chat-area">
+            <!-- <div *ngFor="let entry of mapOfDays$ | async">
+                <h2>{{entry.keys()}}</h2>
+            </div>
+
+            <div *ngFor="let entry of chatDays$ | async">
+                {{
+                    getDate(entry)
+                }}
+            </div> -->
+
             <ng-container *ngIf="user$ | async as currentUser">
-                <div *ngFor="let message of messages$ | async"
+                <div *ngFor="let entry of mapOfDays$ | async"
                 class="chat-bubble-container"
                 >
 
                     <div class = "date-bubble">
                         <span class="date">
-                            {{message.sentDate | dateTimeDisplay}}
+                            {{entry.key.toDateString()}}
                         </span>
                     </div>
 
-                    <div [ngClass]="{ 'sender': message.senderId === currentUser.email}">
+
+                    <div *ngFor="let message of entry[1]" 
+                    [ngClass]="{ 'sender': message.senderId === currentUser.email}">
                         <div class="chat-bubble">
                             {{message.text}}
                             <span class="chat-date">

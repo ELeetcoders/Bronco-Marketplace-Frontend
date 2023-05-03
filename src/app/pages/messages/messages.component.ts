@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
-import { Observable, combineLatest, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, combineLatest, distinct, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Message } from 'src/app/models/Chats';
 import { User } from 'src/app/models/User';
 import { AuthGuardService } from 'src/app/services/AuthGuardService';
 import { ProductDetailService } from 'src/app/services/ProductDetailService';
@@ -73,6 +75,34 @@ export class MessagesComponent implements AfterViewInit{
       })
     )
 
+    chatDays$ : Observable<number[]> = (this.messages$ as Observable<Message[]>).pipe (
+      map(messages => {
+        const dates = messages.map(message => {
+        const date = message.sentDate instanceof Timestamp ? message.sentDate.toDate() : message.sentDate;
+        date.setHours(0, 0, 0, 0);
+        return date.getTime();
+      });
+      return Array.from(new Set(dates)).sort()
+      })
+    );
+
+    mapOfDays$: Observable<Map<Date, Message[]>> = combineLatest([
+      this.messages$,
+      this.chatDays$
+    ]).pipe(
+      map(([messages, chatDays]) => {
+        const maps = this.chatsService.getDateArray(chatDays)
+        return maps.reduce((map, day) => {
+          console.log(messages)
+          console.log(chatDays)
+          const messagesOnDay = messages.filter(message => (this.chatsService.compareDays(message, day)))
+          return map.set(day, messagesOnDay);
+        }, new Map<Date, Message[]>());
+      })
+    ).pipe(
+      tap((val => console.log(val)))
+    );
+
   ngOnInit(): void {
     
   }
@@ -125,5 +155,18 @@ export class MessagesComponent implements AfterViewInit{
         this.endOfChat.nativeElement.scrollIntoView({behavior: "smooth"})
       }
     }, 100)
+  }
+
+  getDateArray(milliSecArray: number[]) : Date[] {
+    const dates : Date[] = []
+    milliSecArray.forEach(num => {
+      dates.push(new Date(num))
+    });
+    
+    return dates
+  }
+
+  getDate(milliSec : number) : Date {
+    return new Date(milliSec)
   }
 }

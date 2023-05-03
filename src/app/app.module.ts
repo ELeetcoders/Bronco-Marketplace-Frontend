@@ -45,6 +45,7 @@ import { DateDisplayPipe } from './pipes/DateDisplayPipe';
 import { TimeDisplayPipe } from './pipes/TimeDisplayPipe';
 import { DateTimeDisplayPipe } from './pipes/DateTimeDisplayPipe';
 import { DayDisplayPipe } from './pipes/display-date.pipe';
+import { Timestamp } from '@angular/fire/firestore/firebase';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
