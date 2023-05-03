@@ -9,11 +9,11 @@
 <div *ngIf="!LoadingService.loading">
     <div *ngIf="verified == true" class="verification">
         <h1>Email verified!</h1>
-        <button type="button" class="btn btn-primary"  (click)="redirectSignIn()">Sign in</button>
+        <button type="button" class="btn btn-primary btn-lg"  (click)="redirectSignIn()">Click here to sign in!</button>
     </div>
     <div *ngIf="verified == false" class="verification">
         <h1>Invalid verification id or expired!</h1>
-        <button type="button" class="btn btn-primary"  (click)="redirectHome()">Go to home</button>
+        <button type="button" class="btn btn-primary btn-lg"  (click)="redirectHome()">Go to home</button>
     </div>
 </div>
 

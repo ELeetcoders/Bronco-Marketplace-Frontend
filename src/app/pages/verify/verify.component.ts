@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/LoadingService';
 import { Location } from '@angular/common';
 import { UserService } from 'src/app/services/UserService';
+import { Observer } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/models/User';
 
 
 @Component({
@@ -20,7 +23,8 @@ export class VerifyComponent {
     public LoadingService: LoadingService,
     private router: Router,
     private location: Location,
-    public userService: UserService
+    public userService: UserService,
+    private http: HttpClient
   ) {}
 
   //validId: boolean = true
@@ -73,8 +77,19 @@ export class VerifyComponent {
   }
 
   redirectSignIn() {
-    this.router.navigate(['/sign-in']).then(() => {
-      // auto sign in-> call api
-    });
+    const options = { withCredentials: true };
+    const data = {}
+    const observer: Observer<any> = {
+      next: response => {
+        let user: User = response
+        this.userService.email = user.email
+        this.userService.profilePic = user.profilePic ?? this.userService.defaultProfilePic
+        this.userService.signedIn = true
+        this.router.navigate(['/'])
+      },
+      error: error => console.error(error),
+      complete: () => console.log('complete')
+    };
+    this.http.post('http://api.broncomarketplace.com:8080/login/verified-email', data, options).subscribe(observer);
   }
 }
