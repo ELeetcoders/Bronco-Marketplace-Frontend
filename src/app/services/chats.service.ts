@@ -40,7 +40,7 @@ export class ChatsService {
     const ref = collection(this.firestore, 'chats');
     return this.userService.currentUser$.pipe(
       concatMap((user) => {
-        const myquery = query(ref, where('userEmails', 'array-contains', user?.email))
+        const myquery = query(ref, where('userEmails', 'array-contains', user?.email), orderBy('lastMessageDate', 'desc'))
         return collectionData(myquery, {idField: 'id'}).pipe(
           map(chats => this.addChatNameAndPic(user.email, chats as Chat[]))
         ) as Observable<Chat[]>
