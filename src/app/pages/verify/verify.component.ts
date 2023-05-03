@@ -30,6 +30,9 @@ export class VerifyComponent {
   ngOnInit() {
     const verificationId = this.route.snapshot.queryParamMap.get('id') ?? '';
     console.log(verificationId)
+    if (this.userService.needToVerify && verificationId == '') {
+      return
+    }
     if (verificationId != '') {
       this.LoadingService.loading = true
     } 
