@@ -1,6 +1,6 @@
 <h1 routerLink="/" class="clickable">Bronco Marketplace</h1>
 
-<div *ngIf="LoadingService.loading" id="spinner" style="height: 55vh;">
+<div *ngIf="LoadingService.loading && verificationId != '' " id="spinner" style="height: 55vh;">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
@@ -9,10 +9,16 @@
 <div *ngIf="!LoadingService.loading">
     <div *ngIf="verified == true" class="verification">
         <h1>Email verified!</h1>
-        <button type="button" class="btn btn-primary"  (click)="redirectHome()">Sign in</button>
+        <button type="button" class="btn btn-primary"  (click)="redirectSignIn()">Sign in</button>
     </div>
     <div *ngIf="verified == false" class="verification">
         <h1>Invalid verification id or expired!</h1>
         <button type="button" class="btn btn-primary"  (click)="redirectHome()">Go to home</button>
     </div>
+</div>
+
+<div *ngIf="userService.needToVerify" class="verify-box">
+    <h2>You Need to Verify Your Email</h2>
+    <p>Please click the verification link we sent to your email address to complete the registration process.</p>
+    <p>This ensures our users are exclusively Cal Poly Pomona students to maintain a safe and secure environment.</p>
 </div>

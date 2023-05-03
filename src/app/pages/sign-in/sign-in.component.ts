@@ -67,7 +67,11 @@ export class SignInComponent {
         //}
         console.log(response);
         this.fetching = false
-        if (response != "FAIL" ) {
+        if (response != "VERIFY") {
+          this.userService.needToVerify = true
+          this.router.navigate(['/verify'])
+        }
+        else if (response != "FAIL" ) {
           let user: User = response
           this.userService.email = this.email
           this.userService.signedIn = true

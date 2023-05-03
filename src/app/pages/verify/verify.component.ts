@@ -3,6 +3,7 @@ import { DocumentReference, Firestore, collection, doc, getDoc, getDocs, query, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/LoadingService';
 import { Location } from '@angular/common';
+import { UserService } from 'src/app/services/UserService';
 
 
 @Component({
@@ -18,20 +19,33 @@ export class VerifyComponent {
     private route: ActivatedRoute,
     public LoadingService: LoadingService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    public userService: UserService
   ) {}
 
-  validId: boolean = true
+  //validId: boolean = true
   verified: boolean | null = null
+  verificationId: string;
 
   ngOnInit() {
-    this.LoadingService.loading = true
-    const verificationId = this.route.snapshot.queryParamMap.get('id');
+    const verificationId = this.route.snapshot.queryParamMap.get('id') ?? '';
     console.log(verificationId)
+    if (verificationId != '') {
+      this.LoadingService.loading = true
+    } 
+    else {
+      this.router.navigate(['/'])
+    }
+    if (this.userService.needToVerify == null) {
+      if (this.userService.signedIn) {
+        this.router.navigate(['/'])
+      }
+    }
     // check firebase collection users and find which user has the field 'verificationId' with query param value
     const usersRef = collection(this.firestore, 'user')
     let user = query(usersRef, where('verificationId', '==', verificationId));
     getDocs(user).then((querySnapshot) => {
+      console.log(querySnapshot.docs)
       //console.log(querySnapshot.docs[0].data())
       if (querySnapshot.size != 0) {
         const docRef = querySnapshot.docs[0].ref
@@ -52,6 +66,12 @@ export class VerifyComponent {
   redirectHome() {
     this.router.navigate(['/']).then(() => {
       //idk
+    });
+  }
+
+  redirectSignIn() {
+    this.router.navigate(['/sign-in']).then(() => {
+      // auto sign in-> call api
     });
   }
 }
