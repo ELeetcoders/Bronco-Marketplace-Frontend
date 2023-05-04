@@ -17,9 +17,11 @@ export class ChatsService {
 
   createChat(otherUser: User) : Observable<string> {
     const ref = collection(this.firestore, 'chats');
+    const today = Timestamp.fromDate(new Date());
     return this.userService.currentUser$.pipe(
       take(1),
       concatMap(user => addDoc(ref, {
+        lastMessageDate: today,
         userEmails: [user.email, otherUser.email],
         users: [
           {
