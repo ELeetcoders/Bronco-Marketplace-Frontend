@@ -53,7 +53,7 @@ export class HeaderComponent {
   //   this.LoadingService.loading = true
     
   //   console.log(searchTerm)
-  //   const searchEndpoint = "http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/search";
+  //   const searchEndpoint = "http://api.broncomarketplace.com/product/search";
   //   const request = {
   //     term: searchTerm
   //   };
@@ -95,7 +95,7 @@ export class HeaderComponent {
 
   // getProducts() {
 
-  //   const getAllProductsEndpoint = "http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/get-all";
+  //   const getAllProductsEndpoint = "http://api.broncomarketplace.com/product/get-all";
   //   let result = this.http.get(getAllProductsEndpoint, {});
   //   // result automatically parsed
 

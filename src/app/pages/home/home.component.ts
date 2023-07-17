@@ -54,7 +54,7 @@ export class HomeComponent {
     this.LoadingService.loading = true
     
     console.log(searchTerm)
-    const searchEndpoint = "http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/search";
+    const searchEndpoint = "http://api.broncomarketplace.com/product/search";
     const request = {
       term: searchTerm
     };
@@ -159,6 +159,6 @@ export class HomeComponent {
       complete: () => console.log('complete')
     };
 
-    this.http.get('http://ec2-54-213-144-191.us-west-2.compute.amazonaws.com:8080/product/get-all', {}).subscribe(observer);
+    this.http.get('http://api.broncomarketplace.com/product/get-all', {}).subscribe(observer);
   }
 }
